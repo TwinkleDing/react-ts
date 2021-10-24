@@ -1,32 +1,25 @@
 module.exports = {
-    {
-        "env": {
-            "browser": true,
-            "es6": true
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
         },
-        "extends": [
-            "airbnb"
-        ],
-        "plugins": [
-            "react",
-            "react-hooks"
-        ],
-
-        "globals": {
-            "__DEV__": false,
-            "__TEST__": false,
-            "__PROD__": false,
-            "__COVERAGE__": false
-        },
-        "parserOptions": {
-            "ecmaFeatures": {
-                "jsx": true
-            },
-            "ecmaVersion": 2018,
-            "sourceType": "module"
-        },
-        "rules": // 定义对象的set存取器属性时，强制定义get
-            "accessor-pairs": 2,
+        "ecmaVersion": 13,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint"
+    ],
+    "rules": { // 定义对象的set存取器属性时，强制定义get
+        "accessor-pairs": 2,
         // 指定数组的元素之间要以空格隔开(,后面)， never参数：[ 之前和 ] 之后不能带空格，always参数：[ 之前和 ] 之后必须带空格
         "array-bracket-spacing": [ 2, "never" ],
         // 在块级作用域外访问块内定义的变量是否报错提示
@@ -112,7 +105,6 @@ module.exports = {
         "no-else-return": 2, //如果if语句里面有return,后面不能跟else语句
         "no-empty": 2, //块语句中的内容不能为空
         "no-empty-character-class": 2, //正则表达式中的[]内容不能为空
-        "no-empty-label": 2, //禁止使用空label
         "no-eq-null": 2, //禁止对null使用==或!=运算符
         "no-eval": 1, //禁止使用eval
         "no-ex-assign": 2, //禁止给catch语句中的异常参数赋值
@@ -190,7 +182,6 @@ module.exports = {
             "vars": "all",
             "args": "after-used"
         } ], //不能有声明后未被使用的变量或参数
-        "no-use-before-define": 2, //未定义前不能使用
         "no-useless-call": 2, //禁止不必要的call和apply
         "no-void": 2, //禁用void操作符
         "no-var": 0, //禁用var，用let和const代替
@@ -253,7 +244,7 @@ module.exports = {
         "prefer-const": 0, //首选const
         "prefer-spread": 0, //首选展开运算
         "prefer-reflect": 0, //首选Reflect的方法
-        "quotes": [ 1, "single" ], //引号类型 `` "" ''
+        "quotes": [ 1, "double" ], //引号类型 `` "" ''
         "quote-props": [ 2, "always" ], //对象字面量中的属性名是否强制双引号
         "radix": 2, //parseInt必须指定第二个参数
         "id-match": 0, //命名检测
@@ -269,7 +260,6 @@ module.exports = {
         "space-before-function-paren": [ 0, "always" ], //函数定义时括号前面要不要有空格
         "space-in-parens": [ 0, "never" ], //小括号里面要不要有空格
         "space-infix-ops": 0, //中缀操作符周围要不要有空格
-        "space-return-throw-case": 2, //return throw case后面要不要加空格
         "space-unary-ops": [ 0, {
             "words": true,
             "nonwords": false
@@ -284,6 +274,4 @@ module.exports = {
         "wrap-regex": 0, //正则表达式字面量用小括号包起来
         "yoda": [ 2, "never" ] //禁止尤达条件
     }
-
-}
-}
+};
