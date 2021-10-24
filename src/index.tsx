@@ -1,12 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import "./css/index.css";
 import reportWebVitals from "./reportWebVitals";
+import { Route, Router, Switch } from "react-router";
+import Form from "./views/form";
+import Table from "./views/table";
+import Chart from "./views/chart";
 
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        <Router>
+            <Switch>
+                <Route path="/form" component={Form} />
+                <Route path="/table" component={Table} />
+                <Route path="/chart" component={Chart} />
+            </Switch>
+        </Router>
     </React.StrictMode>,
     document.getElementById("root")
 );
