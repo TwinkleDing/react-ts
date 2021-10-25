@@ -1,14 +1,9 @@
 import Form from "../views/form";
 import Table from "../views/table";
 import Chart from "../views/chart";
+import { RouterType } from "../interface";
 
-type RouterType = {
-    path: string,
-    name: string,
-    component: React.LazyExoticComponent<any>
-}
-
-const routerList:RouterType[] = [
+const routerList:RouterType = [
     {
         name: "form",
         path: "/form",

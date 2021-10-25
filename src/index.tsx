@@ -2,18 +2,23 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./css/index.css";
 import reportWebVitals from "./reportWebVitals";
-import { Route, Router, Switch } from "react-router";
-import Form from "./views/form";
-import Table from "./views/table";
-import Chart from "./views/chart";
+import { Router, Switch } from "react-router";
+import routerList from "./router/routerList";
+import Routes from "./router/index";
 
 ReactDOM.render(
     <React.StrictMode>
         <Router>
             <Switch>
-                <Route path="/form" component={Form} />
-                <Route path="/table" component={Table} />
-                <Route path="/chart" component={Chart} />
+                {
+                    routerList.map(router =>
+                        <Routes
+                            key={router.path}
+                            path={router.path}
+                            component={router.component}>
+                        </Routes>
+                    )
+                }
             </Switch>
         </Router>
     </React.StrictMode>,
