@@ -2,21 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./css/index.css";
 import reportWebVitals from "./reportWebVitals";
-import { Router, Switch } from "react-router";
+import { Router, Route, Switch } from "react-router";
 import routerList from "./router/routerList";
-import Routes from "./router/index";
+import { RouterType } from "./interface";
 
 ReactDOM.render(
     <React.StrictMode>
         <Router>
             <Switch>
                 {
-                    routerList.map(router =>
-                        <Routes
+                    routerList.map((router: RouterType) =>
+                        <Route
                             key={router.path}
                             path={router.path}
                             component={router.component}>
-                        </Routes>
+                        </Route>
                     )
                 }
             </Switch>

@@ -1,9 +1,8 @@
 import Form from "../views/form";
 import Table from "../views/table";
 import Chart from "../views/chart";
-import { RouterType } from "../interface";
 
-const routerList:RouterType = [
+const routerList = [
     {
         name: "form",
         path: "/form",
