@@ -11,11 +11,13 @@ ReactDOM.render(
         <Router>
             <Switch>
                 {
-                    routerList.map((router: RouterType) =>
+                    routerList.map((router: RouterType, index: number) =>
                         <Route
-                            key={router.path}
+                            key={index}
                             path={router.path}
-                            component={router.component}>
+                            render={
+                                props => <router.component name={router.name} {...props} routes={router.routes} />
+                            }>
                         </Route>
                     )
                 }
