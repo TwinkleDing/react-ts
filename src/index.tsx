@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./css/index.css";
+import "./css/index.less";
 import reportWebVitals from "./reportWebVitals";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import routerList from "./router/routerList";
