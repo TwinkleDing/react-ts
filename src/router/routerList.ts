@@ -5,23 +5,23 @@ import Home from "../views/home";
 
 const routerList = [
     {
-        name: "home",
         path: "/",
+        name: "home",
         component: Home
     },
     {
-        name: "form",
         path: "/form",
+        name: "form",
         component: Form
     },
     {
-        name: "table",
         path: "/table",
+        name: "table",
         component: Table
     },
     {
-        name: "chart",
         path: "/chart",
+        name: "chart",
         component: Chart
     }
 ];
