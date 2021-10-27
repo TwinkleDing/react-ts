@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./css/index.css";
 import reportWebVitals from "./reportWebVitals";
-import { Router, Route, Switch } from "react-router";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import routerList from "./router/routerList";
 import { RouterType } from "./interface";
 
@@ -16,7 +16,7 @@ ReactDOM.render(
                             key={index}
                             path={router.path}
                             render={
-                                props => <router.component name={router.name} {...props} routes={router.routes} />
+                                props => <router.component name={router.name} {...props} />
                             }>
                         </Route>
                     )
