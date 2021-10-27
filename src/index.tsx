@@ -5,21 +5,27 @@ import reportWebVitals from "./reportWebVitals";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import routerList from "./router/routerList";
 import { RouterType } from "./interface";
+import store from "./store/index";
+import Login from "./views/login";
+
+const user = store.getState() && store.getState().user ? store.getState().user : "";
 
 ReactDOM.render(
     <React.StrictMode>
         <Router>
             <Switch>
                 {
-                    routerList.map((router: RouterType, index: number) =>
-                        <Route
-                            key={index}
-                            path={router.path}
-                            render={
-                                props => <router.component name={router.name} {...props} />
-                            }>
-                        </Route>
-                    )
+                    user ?
+                        routerList.map((router: RouterType, index: number) =>
+                            <Route
+                                key={index}
+                                path={router.path}
+                                render={
+                                    props => <router.component name={router.name} {...props} />
+                                }>
+                            </Route>
+                        ) :
+                        <Route exact path="/login" component={Login} />
                 }
             </Switch>
         </Router>
