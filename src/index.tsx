@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import "./css/index.less";
 import reportWebVitals from "./reportWebVitals";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import routerList from "./router/routerList";
 import { RouterType } from "./interface";
 import store from "./store/index";
@@ -12,23 +13,29 @@ const user: string = store.getState() && store.getState().user ? store.getState(
 
 ReactDOM.render(
     <React.StrictMode>
-        <Router>
-            <Switch>
+        <Provider store={store}>
+            <Router>
                 {
                     user ?
-                        routerList.map((router: RouterType, index: number) =>
-                            <Route
-                                key={index}
-                                path={router.path}
-                                render={
-                                    props => <router.component name={router.name} {...props} />
-                                }>
-                            </Route>
-                        ) :
-                        <Route exact path="/login" component={Login} />
+                        <Switch>{
+                            routerList.map((router: RouterType, index: number) =>
+                                <Route
+                                    key={index}
+                                    path={router.path}
+                                    render={
+                                        props => <router.component name={router.name} {...props} />
+                                    }>
+                                </Route>
+                            )
+                        }</Switch> :
+                        <Switch>
+                            <Route path="/login" component={Login} />
+                            <Redirect to="/login" />
+                        </Switch>
+
                 }
-            </Switch>
-        </Router>
+            </Router>
+        </Provider>
     </React.StrictMode>,
     document.getElementById("root")
 );
