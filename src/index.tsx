@@ -8,7 +8,7 @@ import { RouterType } from "./interface";
 import store from "./store/index";
 import Login from "./views/login";
 
-const user = store.getState() && store.getState().user ? store.getState().user : "";
+const user: string = store.getState() && store.getState().user ? store.getState().user : "";
 
 ReactDOM.render(
     <React.StrictMode>

@@ -9,14 +9,15 @@ module.exports = {
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true
+            "tsx": true
         },
         "ecmaVersion": 13,
         "sourceType": "module"
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "@typescript-eslint/eslint-plugin"
     ],
     "rules": { // 定义对象的set存取器属性时，强制定义get
         "accessor-pairs": 2,
