@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export default class Form extends React.Component {
+export default class Chart extends React.Component {
     render() {
         return <div>chart</div>;
     }
