@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Input, Button, Row, Col } from "antd";
 import { FormInstance } from "antd/es/form";
 import "../css/login.scss";
+import store from "../store/index";
 
 const layout = {
     labelCol: { span: 6 },
@@ -23,6 +24,13 @@ export default class Login extends React.Component<any, any> {
 
     onFinish = (values: any) => {
         console.log(values);
+        const action = {
+            type: "USER",
+            value: values.username
+        };
+
+        store.dispatch(action);
+        this.props.history.push("/home");
     };
 
     onReset = () => {
@@ -39,15 +47,15 @@ export default class Login extends React.Component<any, any> {
                     <Form className={`login-form ${this.state.login ? "reg-login-form" : "login-reg-form"}`}
                         {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish}>
                         <Form.Item
-                            label="Username"
+                            label="工号"
                             name="username"
-                            rules={[{ required: true, message: "Please input your username!" }]}>
+                            rules={[{ required: this.state.login, message: "请输入工号!" }]}>
                             <Input />
                         </Form.Item>
                         <Form.Item
-                            label="Password"
+                            label="密码"
                             name="password"
-                            rules={[{ required: true, message: "Please input your password!" }]}>
+                            rules={[{ required: this.state.login, message: "请输入密码!" }]}>
                             <Input.Password />
                         </Form.Item>
 
@@ -65,7 +73,7 @@ export default class Login extends React.Component<any, any> {
                                 </Col>
                             </Row>
                         </Form.Item>
-                        <Register />
+                        <Register login={this.state.login} />
                     </Form>
                 </div>
             </div>
@@ -73,29 +81,27 @@ export default class Login extends React.Component<any, any> {
     }
 }
 
-class Register extends React.Component {
-    render() {
-        return (
-            <div>
-                <Form.Item
-                    label="Username"
-                    name="regUsername"
-                    rules={[{ required: true, message: "Please input your username!" }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    label="Password"
-                    name="regPassword"
-                    rules={[{ required: true, message: "Please input your password!" }]}>
-                    <Input.Password />
-                </Form.Item>
-                <Form.Item
-                    label="PasswordAgain"
-                    name="regPasswordAgain"
-                    rules={[{ required: true, message: "Please input your password!" }]}>
-                    <Input.Password />
-                </Form.Item>
-            </div>
-        );
-    }
+function Register(props: any) {
+    return (
+        <div>
+            <Form.Item
+                label="工号"
+                name="regUsername"
+                rules={[{ required: !props.login, message: "请输入工号!" }]}>
+                <Input />
+            </Form.Item>
+            <Form.Item
+                label="密码"
+                name="regPassword"
+                rules={[{ required: !props.login, message: "请输入密码!" }]}>
+                <Input.Password />
+            </Form.Item>
+            <Form.Item
+                label="再次输入密码"
+                name="regPasswordAgain"
+                rules={[{ required: !props.login, message: "请再次输入密码!" }]}>
+                <Input.Password />
+            </Form.Item>
+        </div>
+    );
 }

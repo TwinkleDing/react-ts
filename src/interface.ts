@@ -1,5 +1,6 @@
 export type RouterType = {
     path: string,
     name: string,
-    component: any
+    component: any,
+    routes?: Array<any>
 }

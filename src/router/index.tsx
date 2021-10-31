@@ -11,22 +11,23 @@ function Routes() {
     return (
         <Router>
             {
-                user ?
+                user !== "" ?
                     <Switch>
                         {
                             routerList.map((router: RouterType, index: number) =>
                                 <Route
+                                    exact
                                     key={index}
                                     path={router.path}
                                     render={
-                                        props => <router.component name={router.name} {...props} />
+                                        props => <router.component name={router.name} routes={router.routes} {...props} />
                                     }>
                                 </Route>
                             )
                         }
                     </Switch> :
                     <Switch>
-                        <Route path="/login" component={Login} />
+                        <Route exact path="/login" component={Login} />
                         <Redirect to="/login" />
                     </Switch>
             }
