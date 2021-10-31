@@ -1,0 +1,41 @@
+.login {
+    height: 100%;
+    width: 100%;
+    position: relative;
+
+    &-box {
+        height: 200px;
+        width: 500px;
+        border: 1px solid #ac0;
+        border-radius: 20px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        padding: 30px;
+        overflow: hidden;
+        transition: all 1.5s;
+    }
+
+    &-form {
+        transition: all 1.5s;
+    }
+}
+
+.login-reg-box {
+    height: 250px;
+}
+
+.reg-login-box {
+    height: 200px;
+}
+
+.login-reg-form {
+    transform: translateY(-120px);
+}
+
+.reg-login-form {
+    transform: translateY(0px);
+}

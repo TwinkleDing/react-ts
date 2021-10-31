@@ -7,33 +7,31 @@ import store from "../store/index";
 
 const user: string = store.getState() && store.getState().user ? store.getState().user : "";
 
-class Routes extends React.Component {
-    render() {
-        return (
-            <Router>
-                {
-                    user ?
-                        <Switch>
-                            {
-                                routerList.map((router: RouterType, index: number) =>
-                                    <Route
-                                        key={index}
-                                        path={router.path}
-                                        render={
-                                            props => <router.component name={router.name} {...props} />
-                                        }>
-                                    </Route>
-                                )
-                            }
-                        </Switch> :
-                        <Switch>
-                            <Route path="/login" component={Login} />
-                            <Redirect to="/login" />
-                        </Switch>
-                }
-            </Router>
-        );
-    }
+function Routes() {
+    return (
+        <Router>
+            {
+                user ?
+                    <Switch>
+                        {
+                            routerList.map((router: RouterType, index: number) =>
+                                <Route
+                                    key={index}
+                                    path={router.path}
+                                    render={
+                                        props => <router.component name={router.name} {...props} />
+                                    }>
+                                </Route>
+                            )
+                        }
+                    </Switch> :
+                    <Switch>
+                        <Route path="/login" component={Login} />
+                        <Redirect to="/login" />
+                    </Switch>
+            }
+        </Router>
+    );
 }
 
 export default Routes;
