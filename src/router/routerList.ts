@@ -1,14 +1,14 @@
 import Form from "../views/form";
 import Table from "../views/table";
-import Chart from "../views/chart";
+import Task from "../views/task";
 import Home from "../views/home";
 import Login from "../views/login";
 
 const routerList = [
     {
         path: "/",
-        name: "home",
-        component: Home
+        name: "task",
+        component: Task
     },
     {
         path: "/home",
@@ -31,9 +31,9 @@ const routerList = [
         component: Table
     },
     {
-        path: "/chart",
-        name: "chart",
-        component: Chart
+        path: "/task",
+        name: "task",
+        component: Task
     }
 ];
 
