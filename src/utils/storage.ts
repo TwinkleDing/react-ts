@@ -1,4 +1,6 @@
-const validatenull = (val:any) :boolean => {
+import {SESSION_STORAGE} from "./common";
+
+const validatenull = (val:any): boolean => {
     if (typeof val === "boolean") {
         return false;
     }
@@ -31,7 +33,7 @@ const validatenull = (val:any) :boolean => {
  * 存储localStorage
  */
 
-export const setStore = (params:any = {}) => {
+export const setStore = (params: any = {}) => {
     let { name, content, type } = params,
         obj = {
             dataType: typeof content,
@@ -40,7 +42,7 @@ export const setStore = (params:any = {}) => {
             datetime: new Date().getTime()
         };
 
-    if (type) {
+    if (type === SESSION_STORAGE) {
         window.sessionStorage.setItem(name, JSON.stringify(obj));
     } else {
         window.localStorage.setItem(name, JSON.stringify(obj));
@@ -49,9 +51,12 @@ export const setStore = (params:any = {}) => {
 /**
  * 获取localStorage
  */
+interface getStorageInter {
+    name: string,
+    debug: boolean
+}
 
-
-export const getStore = (params:any = {}) => {
+export const getStore = (params: getStorageInter = {}) => {
     let { name, debug } = params;
     let obj:any;
     let content;
@@ -86,10 +91,10 @@ export const getStore = (params:any = {}) => {
  * 删除localStorage
  */
 
-export const removeStore = (params:any = {}) => {
+export const removeStore = (params: any = {}) => {
     let { name, type } = params;
 
-    if (type === "session") {
+    if (type === SESSION_STORAGE) {
         window.sessionStorage.removeItem(name);
     } else {
         window.localStorage.removeItem(name);
@@ -99,8 +104,8 @@ export const removeStore = (params:any = {}) => {
 /**
  * 获取全部localStorage
  */
-export const getAllStore = (params:any = {}) => {
-    let list = [], { type } = params;
+export const getAllStore = (type: string) => {
+    let list = [];
 
     if (type) {
         for (let i = 0; i <= window.sessionStorage.length; i++) {
@@ -108,7 +113,7 @@ export const getAllStore = (params:any = {}) => {
                 name: window.sessionStorage.key(i),
                 content: getStore({
                     name: window.sessionStorage.key(i),
-                    type: "session"
+                    type: SESSION_STORAGE
                 })
             });
         }
@@ -128,10 +133,9 @@ export const getAllStore = (params:any = {}) => {
 /**
  * 清空全部localStorage
  */
-export const clearStore = (params:any = {}) => {
-    let { type } = params;
 
-    if (type) {
+export const clearStore = (type: string) => {
+    if (type === SESSION_STORAGE) {
         window.sessionStorage.clear();
     } else {
         window.localStorage.clear();
