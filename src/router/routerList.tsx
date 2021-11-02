@@ -2,7 +2,6 @@ import Form from "../views/form";
 import Table from "../views/table";
 import Task from "../views/task";
 import Home from "../views/home";
-import Login from "../views/login";
 
 const routerList = [
     {
@@ -14,11 +13,6 @@ const routerList = [
         path: "/home",
         name: "home",
         component: Home
-    },
-    {
-        path: "/login",
-        name: "login",
-        component: Login
     },
     {
         path: "/form",

@@ -195,7 +195,6 @@ module.exports = {
         "guard-for-in": 0, //for in循环要用if语句过滤
         "handle-callback-err": 0, //nodejs 处理错误
         "id-length": 0, //变量名长度
-        "indent": [2, 4], //缩进风格
         "init-declarations": 0, //声明时必须赋初值
         "key-spacing": [0, {
             "beforeColon": false,

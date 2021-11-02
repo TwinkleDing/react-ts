@@ -1,34 +1,5 @@
-import {SESSION_STORAGE} from "./common";
+import { LOCAL_STORAGE, SESSION_STORAGE, validateNull } from "./common";
 
-const validatenull = (val:any): boolean => {
-    if (typeof val === "boolean") {
-        return false;
-    }
-    if (typeof val === "number") {
-        return false;
-    }
-    if (val instanceof Array) {
-        if (val.length === 0) {
-            return true;
-        }
-    } else if (val instanceof Object) {
-        if (JSON.stringify(val) === "{}") {
-            return true;
-        }
-    } else {
-        if (
-            val === "null" ||
-                val === null ||
-                val === "undefined" ||
-                val === undefined ||
-                val === ""
-        ) {
-            return true;
-        }
-        return false;
-    }
-    return false;
-};
 /**
  * 存储localStorage
  */
@@ -53,27 +24,25 @@ export const setStore = (params: any = {}) => {
  */
 interface getStorageInter {
     name: string,
-    debug: boolean
+    type: string
 }
 
-export const getStore = (params: getStorageInter = {}) => {
-    let { name, debug } = params;
-    let obj:any;
+export const getStore = (params: getStorageInter) => {
+    let { name, type } = params;
+    let obj: any;
     let content;
 
-    obj = window.sessionStorage.getItem(name);
-    if (validatenull(obj)) {
+    if (type === SESSION_STORAGE) {
+        obj = window.sessionStorage.getItem(name);
+    } else {
         obj = window.localStorage.getItem(name);
     }
-    if (validatenull(obj)) {
+    if (validateNull(obj)) {
         return;
     }
     try {
         obj = JSON.parse(obj);
     } catch {
-        return obj;
-    }
-    if (debug) {
         return obj;
     }
     if (obj.dataType === "string") {
@@ -107,22 +76,33 @@ export const removeStore = (params: any = {}) => {
 export const getAllStore = (type: string) => {
     let list = [];
 
-    if (type) {
+    if (type === SESSION_STORAGE) {
         for (let i = 0; i <= window.sessionStorage.length; i++) {
+            let name = window.sessionStorage.key(i);
+
+            if (name === null) {
+                break;
+            }
             list.push({
-                name: window.sessionStorage.key(i),
+                name: name,
                 content: getStore({
-                    name: window.sessionStorage.key(i),
+                    name: name,
                     type: SESSION_STORAGE
                 })
             });
         }
     } else {
         for (let i = 0; i <= window.localStorage.length; i++) {
+            let name = window.localStorage.key(i);
+
+            if (name === null) {
+                break;
+            }
             list.push({
-                name: window.localStorage.key(i),
+                name: name,
                 content: getStore({
-                    name: window.localStorage.key(i)
+                    name: name,
+                    type: LOCAL_STORAGE
                 })
             });
         }
