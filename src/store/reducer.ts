@@ -8,7 +8,7 @@ interface StateType {
 }
 
 
-export default (state: any = defaultState , action: any) : StateType => {
+export default (state: any = defaultState, action: any) : StateType => {
     let newState: StateType = Object.assign({}, state);
 
     switch(action.type) {

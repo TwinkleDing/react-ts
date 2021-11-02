@@ -43,7 +43,7 @@ module.exports = {
         // http://eslint.org/docs/rules/comma-style
         "comma-style": [2, "last"],
         // 圈复杂度
-        "complexity": [2, 9],
+        "complexity": [2, 20],
         // 以方括号取对象属性时，[ 后面和 ] 前面是否需要空格, 可选参数 never, always
         "computed-property-spacing": [2, "never"],
         // 强制方法必须返回值，TypeScript强类型，不配置
@@ -172,7 +172,6 @@ module.exports = {
         "no-throw-literal": 2, //禁止抛出字面量错误 throw "error";
         "no-undef": 1, //不能有未定义的变量
         "no-undef-init": 2, //变量初始化时不能直接给它赋值为undefined
-        "no-undefined": 2, //不能使用undefined
         "no-unexpected-multiline": 2, //避免多行表达式
         "no-underscore-dangle": 1, //标识符不能以_开头或结尾
         "no-unneeded-ternary": 2, //禁止不必要的嵌套 var isYes = answer === 1 ? true : false;
@@ -190,32 +189,8 @@ module.exports = {
             "location": "start"
         }], //不能有警告备注
         "no-with": 2, //禁用with
-        "array-bracket-spacing": [2, "never"], //是否允许非空数组里面有多余的空格
         "arrow-parens": 0, //箭头函数用小括号括起来
         "arrow-spacing": 0, //=>的前/后括号
-        "accessor-pairs": 0, //在对象中使用getter/setter
-        "block-scoped-var": 0, //块语句中使用var
-        "brace-style": [1, "1tbs"], //大括号风格
-        "callback-return": 1, //避免多次调用回调什么的
-        "camelcase": 2, //强制驼峰法命名
-        "comma-dangle": [2, "never"], //对象字面量项尾不能有逗号
-        "comma-spacing": 0, //逗号前后的空格
-        "comma-style": [2, "last"], //逗号风格，换行时在行首还是行尾
-        "complexity": [0, 11], //循环复杂度
-        "computed-property-spacing": [0, "never"], //是否允许计算后的键名什么的
-        "consistent-return": 0, //return 后面是否允许省略
-        "consistent-this": [2, "that"], //this别名
-        "constructor-super": 0, //非派生类不能调用super，派生类必须调用super
-        "curly": [2, "all"], //必须使用 if(){} 中的{}
-        "default-case": 2, //switch语句最后必须有default
-        "dot-location": 0, //对象访问符的位置，换行的时候在行首还是行尾
-        "dot-notation": [0, {
-            "allowKeywords": true
-        }], //避免不必要的方括号
-        "eol-last": 0, //文件以单一的换行符结束
-        "eqeqeq": 2, //必须使用全等
-        "func-names": 0, //函数表达式必须有名字
-        "func-style": [0, "declaration"], //函数风格，规定只能使用函数声明/函数表达式
         "generator-star-spacing": 0, //生成器函数*的前后空格
         "guard-for-in": 0, //for in循环要用if语句过滤
         "handle-callback-err": 0, //nodejs 处理错误
