@@ -1,33 +1,39 @@
-import Form from "../views/form";
-import Table from "../views/table";
+import Undone from "../views/undone";
+import Progress from "../views/progress";
 import Task from "../views/task";
-import Home from "../views/home";
+import Management from "../views/management";
+import My from "../views/my";
 
 const routerList = [
     {
         path: "/",
-        name: "task",
-        component: Task
+        name: "undone",
+        component: Undone
     },
     {
-        path: "/home",
-        name: "home",
-        component: Home
+        path: "/undone",
+        name: "undone",
+        component: Undone
     },
     {
-        path: "/form",
-        name: "form",
-        component: Form
-    },
-    {
-        path: "/table",
-        name: "table",
-        component: Table
+        path: "/progress",
+        name: "progress",
+        component: Progress
     },
     {
         path: "/task",
         name: "task",
         component: Task
+    },
+    {
+        path: "/management",
+        name: "management",
+        component: Management
+    },
+    {
+        path: "/my",
+        name: "my",
+        component: My
     }
 ];
 
