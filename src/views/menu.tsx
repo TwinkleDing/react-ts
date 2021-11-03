@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Layout, Menu, Breadcrumb } from "antd";
 import { QuestionCircleOutlined, AlignLeftOutlined, ContainerOutlined, UserSwitchOutlined, SettingOutlined } from "@ant-design/icons";
 import "../css/menu.scss";
+import { currentPath } from "../utils/common";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -28,7 +29,7 @@ export default class Menus extends React.Component<any, any> {
                     <Sider width={200} className="site-layout-background">
                         <Menu
                             mode="inline"
-                            defaultSelectedKeys={["task"]}
+                            defaultSelectedKeys={[currentPath ? currentPath : "undone"]}
                             style={{ height: "100%", borderRight: 0 }}>
                             <Menu.Item key="undone" icon={<QuestionCircleOutlined />}>
                                 <Link to="/undone">未完成的</Link>

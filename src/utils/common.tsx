@@ -32,3 +32,7 @@ export const validateNull = (val: any): boolean => {
     }
     return false;
 };
+
+const pathArr = window.location.href.split("/");
+
+export const currentPath = pathArr[pathArr.length - 1];
