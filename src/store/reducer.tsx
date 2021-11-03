@@ -1,6 +1,12 @@
-let defaultState = localStorage.getItem("persist:root");
+import { getStore, setStore } from "../utils/storage";
+import { PROJECT_NAME, LOCAL_STORAGE } from "../utils/common";
 
-defaultState = defaultState ? JSON.parse(defaultState) : {};
+let defaultState = getStore({
+    name: PROJECT_NAME,
+    type: LOCAL_STORAGE
+});
+
+defaultState = defaultState ? defaultState : {};
 
 interface StateType {
     user: string,
@@ -14,11 +20,20 @@ export default (state: any = defaultState, action: any): StateType => {
     switch (action.type) {
         case "USER":
             newState.user = action;
-            return newState;
+            break;
         case "AVATAR":
             newState.avatar = action;
-            return newState;
+            break;
         default:
-            return state;
+            console.log(newState);
+            break;
     }
+
+    setStore({
+        name: PROJECT_NAME,
+        type: LOCAL_STORAGE,
+        content: newState
+    });
+    return newState;
+
 };

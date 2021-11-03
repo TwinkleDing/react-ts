@@ -10,7 +10,6 @@ const { Header, Content, Footer, Sider } = Layout;
 export default class Menus extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
-        console.log(this.props);
     }
     render() {
         return (

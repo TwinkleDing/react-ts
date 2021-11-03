@@ -1,5 +1,6 @@
 export const LOCAL_STORAGE = "localStorage";
 export const SESSION_STORAGE = "sessionStorage";
+export const PROJECT_NAME = "react-ts";
 export const LOGIN_PATH = "login";
 
 export const validateNull = (val: any): boolean => {
