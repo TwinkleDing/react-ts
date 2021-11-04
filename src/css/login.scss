@@ -16,11 +16,6 @@
         margin: auto;
         padding: 30px;
         overflow: hidden;
-        transition: all 1s;
-    }
-
-    &-form {
-        transition: all 1s;
     }
 }
 
@@ -30,12 +25,4 @@
 
 .reg-login-box {
     height: 200px;
-}
-
-.login-reg-form {
-    transform: translateY(-120px);
-}
-
-.reg-login-form {
-    transform: translateY(0px);
 }

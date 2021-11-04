@@ -1,0 +1,40 @@
+.task {
+    &-new {
+        display: flex;
+        justify-content: space-around;
+        & > div {
+            height: 300px;
+            width: 300px;
+            margin: 30px;
+            border: 1px solid $highlight-color;
+            overflow: hidden;
+            text-align: center;
+            border-radius: 50%;
+        }
+    }
+    &-preset {
+        &-title {
+            font-size: 24px;
+            @extend .translateY100;
+        }
+        &-content {
+            @extend .translateY100;
+            :first-child {
+                @extend .translateX230;
+            }
+            :last-child {
+                @extend .translateX-230;
+            }
+        }
+    }
+    &-preset:hover {
+        .task-preset-title {
+            @extend .translateY60;
+        }
+        .task-preset-content {
+            & > label {
+                @extend .translateX0;
+            }
+        }
+    }
+}
