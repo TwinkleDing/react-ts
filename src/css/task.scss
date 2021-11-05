@@ -32,7 +32,10 @@
             @extend .translateY60;
         }
         .task-preset-content {
-            & > label {
+            :first-child {
+                @extend .translateX0;
+            }
+            :last-child {
                 @extend .translateX0;
             }
         }
