@@ -1,5 +1,6 @@
 import React from "react";
 import { Divider, Table, Empty } from "antd";
+import { progressTableListType, progressTableType, progressStateType } from "../interface";
 
 const columns = [
     {
@@ -16,13 +17,8 @@ const columns = [
     }
 ];
 
-interface itemType {
-    key: number,
-    age: number,
-    name: string,
-    address: string
-}
-const listData: itemType[] = [];
+
+const listData: progressTableListType[] = [];
 
 for (let i = 0; i < 46; i++) {
     listData.push({
@@ -32,10 +28,8 @@ for (let i = 0; i < 46; i++) {
         address: `London, Park Lane no. ${i}`
     });
 }
-interface progressType {
-    selectedRowKeys: number[]
-}
-export default class Progress extends React.Component<any, progressType> {
+
+export default class Progress extends React.Component<any, progressStateType> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -66,11 +60,7 @@ export default class Progress extends React.Component<any, progressType> {
         );
     }
 }
-interface progressTableType {
-    selectedRowKeys: number[],
-    onSelectChange: any,
-    data: itemType[]
-}
+
 function ProgressTable(props: progressTableType) {
     const { selectedRowKeys, onSelectChange, data } = props;
     const rowSelection = {
@@ -84,7 +74,8 @@ function ProgressTable(props: progressTableType) {
     };
 
     return (
-        <Table rowSelection={rowSelection}
+        <Table
+            rowSelection={rowSelection}
             columns={columns}
             dataSource={data} />
     );

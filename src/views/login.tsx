@@ -44,8 +44,12 @@ export default class Login extends React.Component<any, any> {
         return (
             <div className="login">
                 <div className={`login-box ${this.state.login ? "reg-login-box" : "login-reg-box"}`}>
-                    <Form className={`login-form ${this.state.login ? "translateY0" : "translateY-120"}`}
-                        {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish}>
+                    <Form
+                        name="control-ref"
+                        ref={this.formRef}
+                        onFinish={this.onFinish}
+                        {...layout}
+                        className={`login-form ${this.state.login ? "translateY0" : "translateY-120"}`}>
                         <Form.Item
                             label="工号"
                             name="username"
