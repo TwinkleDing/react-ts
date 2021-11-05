@@ -16,36 +16,40 @@ const columns = [
     }
 ];
 
-interface aa {
+interface itemType {
     key: number,
     age: number,
     name: string,
     address: string
 }
-const data: aa[] = [];
+const listData: itemType[] = [];
 
 for (let i = 0; i < 46; i++) {
-    data.push({
+    listData.push({
         key: i,
         name: `Edward King ${i}`,
         age: 32,
         address: `London, Park Lane no. ${i}`
     });
 }
-export default class Progress extends React.Component<any, any> {
+interface progressType {
+    selectedRowKeys: number[]
+}
+export default class Progress extends React.Component<any, progressType> {
     constructor(props: any) {
         super(props);
-
         this.state = {
-            selectedRowKeys: [1]
+            selectedRowKeys: []
         };
 
     }
-    onSelectChange = (chooseKeys: any) => {
+    onSelectChange = (chooseKeys: number[]) => {
         console.log("selectedRowKeys changed: ", chooseKeys);
         this.setState({
             selectedRowKeys: chooseKeys
-        });
+        }, () =>
+            console.log(this.state)
+        );
     };
     render() {
         return (
@@ -53,20 +57,22 @@ export default class Progress extends React.Component<any, any> {
                 <Divider orientation="left">进行中的任务</Divider>
                 <Empty />
                 <Divider orientation="left">任务详情</Divider>
-                <ProgressTable data={data} selectedRowKeys={this.state.selectedRowKeys} onSelectChange={this.onSelectChange.bind(this)} />
+                <ProgressTable
+                    data={listData}
+                    selectedRowKeys={this.state.selectedRowKeys}
+                    onSelectChange={this.onSelectChange} />
             </div>
 
         );
     }
 }
-
-function ProgressTable(props: any) {
-    console.log(props);
-    let onSelectChange = (chooseKeys: any) => {
-        props.onSelectChange(chooseKeys);
-    };
-
-    const { selectedRowKeys } = props;
+interface progressTableType {
+    selectedRowKeys: number[],
+    onSelectChange: any,
+    data: itemType[]
+}
+function ProgressTable(props: progressTableType) {
+    const { selectedRowKeys, onSelectChange, data } = props;
     const rowSelection = {
         selectedRowKeys,
         onChange: onSelectChange,
@@ -77,8 +83,9 @@ function ProgressTable(props: any) {
         ]
     };
 
-
     return (
-        <Table rowSelection={rowSelection} columns={columns} dataSource={props.data} />
+        <Table rowSelection={rowSelection}
+            columns={columns}
+            dataSource={data} />
     );
 }
