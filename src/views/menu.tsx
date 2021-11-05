@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Layout, Menu, Breadcrumb } from "antd";
-import { QuestionCircleOutlined, AlignLeftOutlined, ContainerOutlined, UserSwitchOutlined, SettingOutlined } from "@ant-design/icons";
+import { QuestionCircleOutlined, AlignLeftOutlined, DiffOutlined, UserSwitchOutlined, SettingOutlined } from "@ant-design/icons";
 import "../css/menu.scss";
 import { currentPath } from "../utils/common";
 
@@ -34,11 +34,11 @@ export default class Menus extends React.Component<any, any> {
                             <Menu.Item key="undone" icon={<QuestionCircleOutlined />}>
                                 <Link to="/undone">未完成的</Link>
                             </Menu.Item>
+                            <Menu.Item key="task" icon={<DiffOutlined />}>
+                                <Link to="/task">发起任务</Link>
+                            </Menu.Item>
                             <Menu.Item key="progress" icon={<AlignLeftOutlined />}>
                                 <Link to="/progress">查看进度</Link>
-                            </Menu.Item>
-                            <Menu.Item key="task" icon={<ContainerOutlined />}>
-                                <Link to="/task">发起任务</Link>
                             </Menu.Item>
                             <Menu.Item key="management" icon={<UserSwitchOutlined />}>
                                 <Link to="/management">人员管理</Link>
