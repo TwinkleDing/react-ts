@@ -102,20 +102,9 @@ function SettingColumn(props: any) {
         setButtonClick(true);
     };
     let confirm = (type: string) => {
-        if (type === "urged") {
-            setUrgedVisible(false);
-        } else {
-            setAbnormalVisible(false);
-        }
+        cancel(type);
     };
 
-    let cancel = (type: string) => {
-        if (type === "urged") {
-            setUrgedVisible(false);
-        } else {
-            setAbnormalVisible(false);
-        }
-    };
     let handleVisibleChange = () => {
         if (!buttonClick) {
             return;
@@ -123,6 +112,13 @@ function SettingColumn(props: any) {
         setAbnormalVisible(false);
         setUrgedVisible(false);
         setButtonClick(false);
+    };
+    let cancel = (type: string) => {
+        if (type === "urged") {
+            setUrgedVisible(false);
+        } else {
+            setAbnormalVisible(false);
+        }
     };
 
     return (

@@ -2,7 +2,8 @@
     &-new {
         display: flex;
         justify-content: space-around;
-        & > div {
+
+        &>div {
             height: 300px;
             width: 300px;
             margin: 30px;
@@ -12,32 +13,72 @@
             border-radius: 50%;
         }
     }
+
     &-preset {
         &-title {
             font-size: 24px;
             @extend .translateY100;
         }
+
         &-content {
             @extend .translateY100;
+
             :first-child {
                 @extend .translateX230;
             }
+
             :last-child {
                 @extend .translateX-230;
             }
         }
     }
+
     &-preset:hover {
         .task-preset-title {
             @extend .translateY60;
         }
+
         .task-preset-content {
             :first-child {
                 @extend .translateX0;
             }
+
             :last-child {
                 @extend .translateX0;
             }
+        }
+    }
+
+    &-custom {
+        &-title {
+            font-size: 24px;
+            @extend .translateY100;
+        }
+
+        &-content {
+            @extend .translateY180;
+            background-color: #fafafa;
+            opacity: 0;
+            height: 0;
+            padding: 0 0 30%;
+        }
+
+        &-upload {
+            border: none !important;
+        }
+
+    }
+
+    &-custom:hover {
+        .task-custom-title {
+            @extend .translateY60;
+        }
+
+        .task-custom-content {
+            @extend .translateY80;
+            height: 70%;
+            opacity: 1;
+
         }
     }
 }
