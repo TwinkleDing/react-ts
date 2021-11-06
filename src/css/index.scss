@@ -29,6 +29,12 @@ $highlight-color: #1890ff;
 // 警告颜色
 $warn-color: #e6a23c;
 
+// 警告按钮
+%warn-button {
+    background: $warn-color;
+    border-color: $warn-color;
+}
+
 
 // 引入自定义样式动画
 @import './transform.scss';

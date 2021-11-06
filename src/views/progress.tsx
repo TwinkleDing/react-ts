@@ -29,9 +29,9 @@ for (let i = 0; i < 46; i++) {
     listData.push({
         key: i,
         name: `Edward King ${i}`,
-        userId: 32,
+        userId: i,
         workTime: i,
-        setting: <SettingColumn />
+        setting: <SettingColumn userId={i} />
     });
 }
 
@@ -87,11 +87,24 @@ function ProgressTable(props: progressTableType) {
     );
 }
 
-function SettingColumn() {
-    return(
+function SettingColumn(props:any) {
+    let urged = () => {
+        console.log(props);
+    };
+    let abnormal = () =>{
+        console.log(props);
+    };
+
+    return (
         <div className="progress-setting">
-            <Button className="progress-setting-urged" type="primary">催</Button>
-            <Button type="primary" danger>异</Button>
+            <Button
+                onClick={urged}
+                className="progress-setting-urged"
+                type="primary">催</Button>
+            <Button
+                onClick={abnormal}
+                type="primary"
+                danger>异</Button>
         </div>
     );
 }

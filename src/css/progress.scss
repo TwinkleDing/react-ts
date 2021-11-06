@@ -1,9 +1,20 @@
 .progress {
     &-setting {
         &-urged {
-            background: $warn-color;
-            border-color: $warn-color;
             margin: 0 10px;
+            @extend %warn-button;
+
+            &:hover {
+                @extend %warn-button;
+            }
+
+            &:visited {
+                @extend %warn-button;
+            }
+
+            &:focus {
+                @extend %warn-button;
+            }
         }
     }
 }
