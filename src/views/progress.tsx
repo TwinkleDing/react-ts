@@ -1,5 +1,5 @@
-import React from "react";
-import { Divider, Table, Empty, Button } from "antd";
+import React, { useState } from "react";
+import { Divider, Table, Empty, Button, Popconfirm } from "antd";
 import { progressTableListType, progressTableType, progressStateType } from "../interface";
 
 const columns = [
@@ -87,24 +87,73 @@ function ProgressTable(props: progressTableType) {
     );
 }
 
-function SettingColumn(props:any) {
-    let urged = () => {
-        console.log(props);
+function SettingColumn(props: any) {
+    const [urgedVisible, setUrgedVisible] = useState(false);
+    const [abnormalVisible, setAbnormalVisible] = useState(false);
+    const [buttonClick, setButtonClick] = useState(false);
+    let urged = (userId: number) => {
+        console.log(userId);
+        setUrgedVisible(true);
+        setButtonClick(true);
     };
-    let abnormal = () =>{
-        console.log(props);
+    let abnormal = (userId: number) => {
+        console.log(userId);
+        setAbnormalVisible(true);
+        setButtonClick(true);
+    };
+    let confirm = (type: string) => {
+        if (type === "urged") {
+            setUrgedVisible(false);
+        } else {
+            setAbnormalVisible(false);
+        }
+    };
+
+    let cancel = (type: string) => {
+        if (type === "urged") {
+            setUrgedVisible(false);
+        } else {
+            setAbnormalVisible(false);
+        }
+    };
+    let handleVisibleChange = (type: string) => {
+        console.log(type);
+        if(!buttonClick) {
+            return;
+        }
+        setAbnormalVisible(false);
+        setUrgedVisible(false);
+        setButtonClick(false);
     };
 
     return (
         <div className="progress-setting">
-            <Button
-                onClick={urged}
-                className="progress-setting-urged"
-                type="primary">催</Button>
-            <Button
-                onClick={abnormal}
-                type="primary"
-                danger>异</Button>
+            <Popconfirm
+                title="Are you sure delete this task?"
+                visible={urgedVisible}
+                onVisibleChange={() => handleVisibleChange("urged")}
+                onConfirm={() => confirm("urged")}
+                onCancel={() => cancel("urged")}
+                okText="Yes"
+                cancelText="No">
+                <Button
+                    onClick={() => urged(props.userId)}
+                    className="progress-setting-urged"
+                    type="primary">催</Button>
+            </Popconfirm>
+            <Popconfirm
+                title="Are you sure delete this task?"
+                visible={abnormalVisible}
+                onVisibleChange={() => handleVisibleChange("abnormal")}
+                onConfirm={() => confirm("abnormal")}
+                onCancel={() => cancel("abnormal")}
+                okText="Yes"
+                cancelText="No">
+                <Button
+                    onClick={() => abnormal(props.userId)}
+                    type="primary"
+                    danger>异</Button>
+            </Popconfirm>
         </div>
     );
 }
