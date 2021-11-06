@@ -1,3 +1,9 @@
 .progress {
-    
+    &-setting {
+        &-urged {
+            background: $warn-color;
+            border-color: $warn-color;
+            margin: 0 10px;
+        }
+    }
 }

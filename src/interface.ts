@@ -4,17 +4,21 @@ export type RouterType = {
     component: any,
     routes?: Array<any>
 }
+
 export interface progressTableListType {
     key: number,
-    age: number,
+    userId: number,
     name: string,
-    address: string
+    workTime: number,
+    setting: any
 }
+
 export interface progressTableType {
     selectedRowKeys: number[],
     onSelectChange: any,
     data: progressTableListType[]
 }
+
 export interface progressStateType {
     selectedRowKeys: number[]
 }

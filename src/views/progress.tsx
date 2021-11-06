@@ -1,19 +1,24 @@
 import React from "react";
-import { Divider, Table, Empty } from "antd";
+import { Divider, Table, Empty, Button } from "antd";
 import { progressTableListType, progressTableType, progressStateType } from "../interface";
 
 const columns = [
     {
-        title: "Name",
+        title: "工号",
+        dataIndex: "userId"
+    },
+    {
+        title: "姓名",
         dataIndex: "name"
     },
     {
-        title: "Age",
-        dataIndex: "age"
+        title: "工时",
+        dataIndex: "workTime"
     },
     {
-        title: "Address",
-        dataIndex: "address"
+        title: "操作",
+        dataIndex: "setting",
+        width: "200px"
     }
 ];
 
@@ -24,8 +29,9 @@ for (let i = 0; i < 46; i++) {
     listData.push({
         key: i,
         name: `Edward King ${i}`,
-        age: 32,
-        address: `London, Park Lane no. ${i}`
+        userId: 32,
+        workTime: i,
+        setting: <SettingColumn />
     });
 }
 
@@ -78,5 +84,14 @@ function ProgressTable(props: progressTableType) {
             rowSelection={rowSelection}
             columns={columns}
             dataSource={data} />
+    );
+}
+
+function SettingColumn() {
+    return(
+        <div className="progress-setting">
+            <Button className="progress-setting-urged" type="primary">催</Button>
+            <Button type="primary" danger>异</Button>
+        </div>
     );
 }
