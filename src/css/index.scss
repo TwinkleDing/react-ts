@@ -18,8 +18,9 @@ html, body, #root, #app {
     height: 100%;
     width: 100%;
 }
-.ant-layout {
+.app-content {
     min-width: 1350px;
+    min-height: 100%;
     height: auto;
 }
 

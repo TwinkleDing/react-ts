@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Divider, Table, Empty, Button, Popconfirm } from "antd";
+import { Divider, Table, Empty, Button, Popconfirm as PopConfirm } from "antd";
 import { progressTableListType, progressTableType, progressStateType } from "../interface";
 
 const columns = [
@@ -9,7 +9,7 @@ const columns = [
     },
     {
         title: "姓名",
-        dataIndex: "name"
+        dataIndex: "userName"
     },
     {
         title: "工时",
@@ -25,10 +25,10 @@ const columns = [
 
 const listData: progressTableListType[] = [];
 
-for (let i = 0; i < 46; i++) {
+for (let i = 0; i < 0; i++) {
     listData.push({
         key: i,
-        name: `Edward King ${i}`,
+        userName: `Edward King ${i}`,
         userId: i,
         workTime: i,
         setting: <SettingColumn userId={i} />
@@ -116,9 +116,8 @@ function SettingColumn(props: any) {
             setAbnormalVisible(false);
         }
     };
-    let handleVisibleChange = (type: string) => {
-        console.log(type);
-        if(!buttonClick) {
+    let handleVisibleChange = () => {
+        if (!buttonClick) {
             return;
         }
         setAbnormalVisible(false);
@@ -128,32 +127,30 @@ function SettingColumn(props: any) {
 
     return (
         <div className="progress-setting">
-            <Popconfirm
-                title="Are you sure delete this task?"
+            <PopConfirm
+                title={`是否催促${props.userId}更新数据？`}
                 visible={urgedVisible}
-                onVisibleChange={() => handleVisibleChange("urged")}
+                onVisibleChange={handleVisibleChange}
                 onConfirm={() => confirm("urged")}
                 onCancel={() => cancel("urged")}
-                okText="Yes"
-                cancelText="No">
+                okText="赶紧催催"
+                cancelText="算了算了">
                 <Button
                     onClick={() => urged(props.userId)}
                     className="progress-setting-urged"
                     type="primary">催</Button>
-            </Popconfirm>
-            <Popconfirm
-                title="Are you sure delete this task?"
+            </PopConfirm>
+            <PopConfirm
+                title={`是否通知${props.userId}此条信息异常?`}
                 visible={abnormalVisible}
-                onVisibleChange={() => handleVisibleChange("abnormal")}
+                onVisibleChange={handleVisibleChange}
                 onConfirm={() => confirm("abnormal")}
-                onCancel={() => cancel("abnormal")}
-                okText="Yes"
-                cancelText="No">
+                onCancel={() => cancel("abnormal")}>
                 <Button
                     onClick={() => abnormal(props.userId)}
                     type="primary"
                     danger>异</Button>
-            </Popconfirm>
+            </PopConfirm>
         </div>
     );
 }

@@ -8,7 +8,7 @@ export type RouterType = {
 export interface progressTableListType {
     key: number,
     userId: number,
-    name: string,
+    userName: string,
     workTime: number,
     setting: any
 }
