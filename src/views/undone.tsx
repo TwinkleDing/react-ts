@@ -1,32 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Divider, Table, Form, InputNumber, Input } from "antd";
+import { Divider, Table, Form, InputNumber, Input, Popconfirm as PopConfirm, Typography, Button } from "antd";
 
-
-const columns = [
-    {
-        title: "name",
-        dataIndex: "name",
-        width: "25%",
-        editable: true
-    },
-    {
-        title: "age",
-        dataIndex: "age",
-        width: "15%",
-        editable: true
-    },
-    {
-        title: "address",
-        dataIndex: "address",
-        width: "40%",
-        editable: true
-    },
-    {
-        title: "operation",
-        dataIndex: "operation"
-    }
-];
 
 interface Item {
     key: string;
@@ -97,9 +72,51 @@ export default class Undone extends React.Component<any, any> {
             editingKey: "",
             form: React.createRef()
         };
+
     }
 
-    mergedColumns = columns.map(col => {
+    columns = [
+        {
+            title: "name",
+            dataIndex: "name",
+            width: "25%",
+            editable: true
+        },
+        {
+            title: "age",
+            dataIndex: "age",
+            width: "15%",
+            editable: true
+        },
+        {
+            title: "address",
+            dataIndex: "address",
+            width: "40%",
+            editable: true
+        },
+        {
+            title: "operation",
+            dataIndex: "operation",
+            render: (_: any, record: Item) => {
+                const editable = this.isEditing(record);
+
+                return editable ?
+                    <span>
+                        <Button type="link" onClick={() => this.save(record.key)} style={{ marginRight: 8 }}>
+                            Save
+                        </Button>
+                        <PopConfirm title="Sure to cancel?" onConfirm={this.cancel}>
+                            <Button type="link">Cancel</Button>
+                        </PopConfirm>
+                    </span> :
+                    <Typography.Link disabled={this.state.editingKey !== ""} onClick={() => this.edit(record)}>
+                        Edit
+                    </Typography.Link>
+                    ;
+            }
+        }
+    ];
+    mergedColumns = this.columns.map(col => {
         if (!col.editable) {
             return col;
         }
@@ -116,6 +133,13 @@ export default class Undone extends React.Component<any, any> {
     });
 
     isEditing = (record: Item) => record.key === this.state.editingKey;
+    edit = (record: Partial<Item> & { key: React.Key }) => {
+        this.state.form.current.setFieldsValue({ name: "", age: "", address: "", ...record });
+        console.log(record);
+        this.setState({
+            editingKey: record.key
+        });
+    };
     cancel = () => {
         this.setState({
             editingKey: ""
@@ -123,7 +147,7 @@ export default class Undone extends React.Component<any, any> {
     }
     save = async (key: React.Key) => {
         try {
-            const row = (await this.state.form.validateFields()) as Item;
+            const row = (await this.state.form.current.validateFields()) as Item;
 
             const newData = [...this.state.data];
             const index = newData.findIndex(item => key === item.key);
