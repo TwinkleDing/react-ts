@@ -39,6 +39,11 @@
     transform: translateY(-120px);
 }
 
+.translateY120 {
+    transition: all 1s;
+    transform: translateY(120px);
+}
+
 .translateY180 {
     transition: all 1s;
     transform: translateY(180px);

@@ -31,6 +31,13 @@
                 @extend .translateX-230;
             }
         }
+
+        &-btn {
+            transition: all 1s;
+            transform: translateY(68px);
+            opacity: 0;
+            height: 0;
+        }
     }
 
     &-preset:hover {
@@ -47,6 +54,12 @@
                 @extend .translateX0;
             }
         }
+
+        .task-preset-btn {
+            @extend .translateY120;
+            opacity: 1;
+            height: 40px;
+        }
     }
 
     &-custom {
@@ -61,18 +74,19 @@
             opacity: 0;
             height: 0;
             padding: 0 0 30%;
-            overflow: hidden;
         }
 
         &-upload {
             border: none !important;
             width: 80%;
         }
+
         .ant-upload-list {
             transform: translateY(-100px);
         }
+
         .ant-upload-text {
-            margin-top: 65px!important;
+            margin-top: 65px !important;
         }
 
     }

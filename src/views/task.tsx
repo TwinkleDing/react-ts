@@ -1,21 +1,24 @@
 import React from "react";
-import { Tag, Divider, Radio, Upload, message } from "antd";
+import { Tag, Divider, Radio, Upload, Button, message } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 const { Dragger } = Upload;
 
-export default class Task extends React.Component {
+export default class Task extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state = {
-            radioValue: ""
+            radioValue: "workTime"
         };
     }
-    onChange4 = (e: any) => {
+    presetChange = (e: any) => {
         console.log("radio4 checked", e.target.value);
         this.setState({
             radioValue: e.target.value
         });
     };
+    presetConfirm = () => {
+        console.log(this.state.radioValue);
+    }
     render() {
         const props = {
             name: "file",
@@ -43,7 +46,7 @@ export default class Task extends React.Component {
         return (
             <div className="task">
                 <Divider orientation="left">任务模板</Divider>
-                <TemplateList />
+                <TemplateList dataList={templateList} />
                 <Divider orientation="left">新建任务</Divider>
                 <div className="task-new">
                     <div className="task-preset">
@@ -51,10 +54,14 @@ export default class Task extends React.Component {
                         <Radio.Group
                             className="task-preset-content"
                             options={optionsWithDisabled}
-                            onChange={this.onChange4}
+                            onChange={this.presetChange}
+                            value={this.state.radioValue}
                             optionType="button"
                             buttonStyle="solid"
                         />
+                        <div className="task-preset-btn">
+                            <Button onClick={this.presetConfirm} type="primary">确定</Button>
+                        </div>
                     </div>
                     <div className="task-custom">
                         <div className="task-custom-title">自定义任务</div>
@@ -73,20 +80,30 @@ export default class Task extends React.Component {
     }
 }
 
-function TemplateList() {
+function TemplateList(props: any) {
+    let templateClick = (templateId: number) => {
+        console.log(templateId);
+    };
+
     return (
         <div>
             {
-                templateList.map(item =>
-                    <Tag key={item.id} color="#108ee9">{item.name}</Tag>
+                props.dataList.map((item: any) =>
+                    <Tag
+                        onClick={() => templateClick(item.id)}
+                        key={item.id}
+                        color="#108ee9">
+                        {item.name}
+                    </Tag>
                 )
             }
         </div>
     );
 }
+
 const optionsWithDisabled = [
-    { label: "工时统计", value: "Apple" },
-    { label: "EHS", value: "Pear" }
+    { label: "工时统计", value: "workTime" },
+    { label: "EHS", value: "EHS" }
 ];
 
 const templateList = [
