@@ -105,7 +105,7 @@ export default class Undone extends React.Component<any, any> {
                         <Button type="link" onClick={() => this.save(record.key)} style={{ marginRight: 8 }}>
                             Save
                         </Button>
-                        <PopConfirm title="Sure to cancel?" onConfirm={this.cancel}>
+                        <PopConfirm title="暂时取消修改?" onConfirm={this.cancel}>
                             <Button type="link">Cancel</Button>
                         </PopConfirm>
                     </span> :
