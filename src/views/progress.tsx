@@ -25,7 +25,7 @@ const columns = [
 
 const listData: progressTableListType[] = [];
 
-for (let i = 0; i < 0; i++) {
+for (let i = 0; i < 25; i++) {
     listData.push({
         key: i,
         userName: `Edward King ${i}`,

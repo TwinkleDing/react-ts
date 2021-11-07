@@ -2,23 +2,57 @@
     &-new {
         display: flex;
         justify-content: space-around;
+        padding-top: 100px;
 
         &>div {
             height: 300px;
             width: 300px;
             margin: 30px;
-            border: 1px solid $highlight-color;
+            // border-bottom: 1px solid $highlight-color;
             overflow: hidden;
             text-align: center;
             border-radius: 50%;
+
+            &:hover {
+                animation: run 2s;
+                animation-iteration-count: infinite;
+                animation-timing-function: cubic-bezier(0.55, 0.06, 0.19, 0.68);
+            }
+        }
+    }
+
+    @keyframes run {
+        0% {
+            box-shadow: 0 0 0 0 $highlight-color;
+        }
+
+        50% {
+            box-shadow: 0 0 100px 10px $highlight-color;
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 $highlight-color;
+        }
+    }
+
+    &-title {
+        font-size: 24px;
+        @extend .translateY100;
+
+        span {
+            display: inline-block;
+
+            &::after {
+                display: block;
+                content: " ";
+                border-bottom: 2px solid $highlight-color;
+                height: 10px;
+                width: 100%;
+            }
         }
     }
 
     &-preset {
-        &-title {
-            font-size: 24px;
-            @extend .translateY100;
-        }
 
         &-content {
             @extend .translateY100;
@@ -41,7 +75,7 @@
     }
 
     &-preset:hover {
-        .task-preset-title {
+        .task-title {
             @extend .translateY60;
         }
 
@@ -63,11 +97,6 @@
     }
 
     &-custom {
-        &-title {
-            font-size: 24px;
-            @extend .translateY100;
-        }
-
         &-content {
             @extend .translateY180;
             background-color: #fafafa;
@@ -92,7 +121,7 @@
     }
 
     &-custom:hover {
-        .task-custom-title {
+        .task-title {
             @extend .translateY60;
         }
 

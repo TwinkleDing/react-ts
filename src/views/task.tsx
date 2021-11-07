@@ -50,7 +50,9 @@ export default class Task extends React.Component<any, any> {
                 <Divider orientation="left">新建任务</Divider>
                 <div className="task-new">
                     <div className="task-preset">
-                        <div className="task-preset-title">预制任务</div>
+                        <div className="task-title">
+                            <span>预制任务</span>
+                        </div>
                         <Radio.Group
                             className="task-preset-content"
                             options={optionsWithDisabled}
@@ -64,7 +66,9 @@ export default class Task extends React.Component<any, any> {
                         </div>
                     </div>
                     <div className="task-custom">
-                        <div className="task-custom-title">自定义任务</div>
+                        <div className="task-title">
+                            <span>自定义任务</span>
+                        </div>
                         <div className="task-custom-content">
                             <Dragger className="task-custom-upload" {...props}>
                                 <p className="ant-upload-text">单击或拖动文件到此区域以上载</p>
