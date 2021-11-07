@@ -61,10 +61,18 @@
             opacity: 0;
             height: 0;
             padding: 0 0 30%;
+            overflow: hidden;
         }
 
         &-upload {
             border: none !important;
+            width: 80%;
+        }
+        .ant-upload-list {
+            transform: translateY(-100px);
+        }
+        .ant-upload-text {
+            margin-top: 65px!important;
         }
 
     }

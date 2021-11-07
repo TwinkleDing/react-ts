@@ -60,10 +60,10 @@ export default class Task extends React.Component {
                         <div className="task-custom-title">自定义任务</div>
                         <div className="task-custom-content">
                             <Dragger className="task-custom-upload" {...props}>
+                                <p className="ant-upload-text">单击或拖动文件到此区域以上载</p>
                                 <p className="ant-upload-drag-icon">
                                     <InboxOutlined />
                                 </p>
-                                <p className="ant-upload-text">单击或拖动文件到此区域以上载</p>
                             </Dragger>
                         </div>
                     </div>
