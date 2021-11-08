@@ -1,3 +1,4 @@
+import React from "react";
 export type RouterType = {
     path: string,
     name: string,
@@ -21,4 +22,19 @@ export interface progressTableType {
 
 export interface progressStateType {
     selectedRowKeys: number[]
+}
+
+export interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
+    editing: boolean;
+    dataIndex: string;
+    title: any;
+    inputType: "number" | "text";
+    children: React.ReactNode;
+}
+
+export interface UndoneItem {
+    key: string;
+    name: string;
+    age: number;
+    address: string;
 }

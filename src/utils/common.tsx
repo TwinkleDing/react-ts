@@ -36,3 +36,13 @@ export const validateNull = (val: any): boolean => {
 const pathArr = window.location.href.split("/");
 
 export const currentPath = pathArr[pathArr.length - 1];
+
+//表单序列化
+export const serialize = (data: any) => {
+    let list: any = [];
+
+    Object.keys(data).forEach(ele => {
+        list.push(`${ele}=${data[ele]}`);
+    });
+    return list.join("&");
+};

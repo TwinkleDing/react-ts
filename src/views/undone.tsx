@@ -1,15 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { Divider, Table, Form, InputNumber, Input, Popconfirm as PopConfirm, Typography, Button } from "antd";
+import { EditableCellProps, UndoneItem } from "../interface";
 
-
-interface Item {
-    key: string;
-    name: string;
-    age: number;
-    address: string;
-}
-const originData: Item[] = [];
+const originData: UndoneItem[] = [];
 
 for (let i = 0; i < 5; i++) {
     originData.push({
@@ -18,26 +12,12 @@ for (let i = 0; i < 5; i++) {
         age: 32,
         address: `London Park no. ${i}`
     });
-} interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
-    editing: boolean;
-    dataIndex: string;
-    title: any;
-    inputType: "number" | "text";
-    record: Item;
-    index: number;
-    children: React.ReactNode;
 }
-
 const EditableCell: React.FC<EditableCellProps> = ({
     editing,
-    // eslint-disable-next-line react/prop-types
     dataIndex,
     title,
     inputType,
-    // eslint-disable-next-line no-unused-vars
-    record,
-    // eslint-disable-next-line no-unused-vars
-    index,
     children,
     ...restProps
 }) => {
@@ -54,8 +34,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
                             required: true,
                             message: `Please Input ${title}!`
                         }
-                    ]}
-                >
+                    ]}>
                     {inputNode}
                 </Form.Item> :
                 children
@@ -97,7 +76,7 @@ export default class Undone extends React.Component<any, any> {
         {
             title: "operation",
             dataIndex: "operation",
-            render: (_: any, record: Item) => {
+            render: (_: any, record: UndoneItem) => {
                 const editable = this.isEditing(record);
 
                 return editable ?
@@ -111,18 +90,18 @@ export default class Undone extends React.Component<any, any> {
                     </span> :
                     <Typography.Link disabled={this.state.editingKey !== ""} onClick={() => this.edit(record)}>
                         Edit
-                    </Typography.Link>
-                    ;
+                    </Typography.Link>;
             }
         }
-    ];
+    ]
+
     mergedColumns = this.columns.map(col => {
         if (!col.editable) {
             return col;
         }
         return {
             ...col,
-            onCell: (record: Item) => ({
+            onCell: (record: UndoneItem) => ({
                 record,
                 inputType: col.dataIndex === "age" ? "number" : "text",
                 dataIndex: col.dataIndex,
@@ -130,25 +109,25 @@ export default class Undone extends React.Component<any, any> {
                 editing: this.isEditing(record)
             })
         };
-    });
+    })
 
-    isEditing = (record: Item) => record.key === this.state.editingKey;
-    edit = (record: Partial<Item> & { key: React.Key }) => {
+    isEditing = (record: UndoneItem) => record.key === this.state.editingKey;
+    edit = (record: Partial<UndoneItem> & { key: React.Key }) => {
         this.state.form.current.setFieldsValue({ name: "", age: "", address: "", ...record });
-        console.log(record);
         this.setState({
             editingKey: record.key
         });
-    };
+    }
+
     cancel = () => {
         this.setState({
             editingKey: ""
         });
     }
+
     save = async (key: React.Key) => {
         try {
-            const row = (await this.state.form.current.validateFields()) as Item;
-
+            const row = (await this.state.form.current.validateFields()) as UndoneItem;
             const newData = [...this.state.data];
             const index = newData.findIndex(item => key === item.key);
 
@@ -173,10 +152,9 @@ export default class Undone extends React.Component<any, any> {
         } catch (errInfo) {
             console.log("Validate Failed:", errInfo);
         }
-    };
+    }
+
     render() {
-        console.log(this.mergedColumns);
-        console.log(this.state.data);
         return (
             <div>
                 <Divider orientation="left">未完成的任务</Divider>
