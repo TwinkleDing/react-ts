@@ -52,13 +52,13 @@ axios.interceptors.response.use(
         }
         // 如果请求为非200否者默认统一处理
         if (status !== 200) {
-            return Promise.reject(new Error(message));
+            return Promise.reject(message);
         }
         return res.data;
     },
     error => {
         NProgress.done();
-        return Promise.reject(new Error(error));
+        return Promise.reject(error);
     }
 );
 

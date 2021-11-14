@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
+import axios from "../router/axios";
 import { Divider, Table, Form, InputNumber, Input, Popconfirm as PopConfirm, Typography, Button } from "antd";
 import { EditableCellProps, UndoneItem } from "../interface";
 
@@ -52,6 +53,14 @@ export default class Undone extends React.Component<any, any> {
             form: React.createRef()
         };
 
+    }
+    // componentWillMount() {
+
+    // }
+    componentDidMount() {
+        axios.get("http://localhost:8080/do/user/userAll").then(res=>{
+            console.log(res);
+        });
     }
 
     columns = [
