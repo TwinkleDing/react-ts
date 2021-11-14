@@ -23,7 +23,7 @@ export default class Login extends React.Component<any, any> {
         this.formRef = React.createRef<FormInstance>();
     }
     componentDidMount() {
-        axios.get("http://localhost:8080/userAll").then(res=>{
+        axios.get("http://localhost:8080/userAll").then(res => {
             console.log(res);
         });
     }
@@ -31,18 +31,21 @@ export default class Login extends React.Component<any, any> {
 
     onFinish = (values: any) => {
         console.log(values);
-        axios.post("http://localhost:8080/userAdd", {
+        axios.post("http://localhost:8080/userGet", {
             username: values.username,
             password: values.password
-        }).then((res:any) => {
-            console.log(res);
-            const action = {
-                type: "USER",
-                value: values.username
-            };
+        }).then((res: any) => {
+            if (res) {
+                const action = {
+                    type: "USER",
+                    value: res
+                };
 
-            store.dispatch(action);
-            // this.props.history.push("/home");
+                store.dispatch(action);
+                this.props.history.push("/home");
+            } else {
+                console.log("账号不存在");
+            }
         });
     };
 
