@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Layout, Menu, Breadcrumb } from "antd";
-import { QuestionCircleOutlined, AlignLeftOutlined, DiffOutlined, UserSwitchOutlined, SettingOutlined } from "@ant-design/icons";
+import { QuestionCircleOutlined, AlignLeftOutlined, DiffOutlined, UserSwitchOutlined, SettingOutlined, IssuesCloseOutlined } from "@ant-design/icons";
 import "../css/menu.scss";
 import { currentPath } from "../utils/common";
 
@@ -45,6 +45,9 @@ export default class Menus extends React.Component<any, any> {
                             </Menu.Item>
                             <Menu.Item key="my" icon={<SettingOutlined />}>
                                 <Link to="/my">我的信息</Link>
+                            </Menu.Item>
+                            <Menu.Item key="login" icon={<IssuesCloseOutlined />}>
+                                <Link to="/login">退出登录</Link>
                             </Menu.Item>
                         </Menu>
                     </Sider>

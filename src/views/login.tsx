@@ -3,6 +3,7 @@ import { Form, Input, Button, Row, Col } from "antd";
 import { FormInstance } from "antd/es/form";
 import "../css/login.scss";
 import store from "../store/index";
+import axios from "../router/axios";
 
 const layout = {
     labelCol: { span: 6 },
@@ -21,16 +22,28 @@ export default class Login extends React.Component<any, any> {
         };
         this.formRef = React.createRef<FormInstance>();
     }
+    componentDidMount() {
+        axios.get("http://localhost:8080/userAll").then(res=>{
+            console.log(res);
+        });
+    }
+
 
     onFinish = (values: any) => {
         console.log(values);
-        const action = {
-            type: "USER",
-            value: values.username
-        };
+        axios.post("http://localhost:8080/userAdd", {
+            username: values.username,
+            password: values.password
+        }).then((res:any) => {
+            console.log(res);
+            const action = {
+                type: "USER",
+                value: values.username
+            };
 
-        store.dispatch(action);
-        this.props.history.push("/home");
+            store.dispatch(action);
+            // this.props.history.push("/home");
+        });
     };
 
     onReset = () => {

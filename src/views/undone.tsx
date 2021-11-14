@@ -58,7 +58,7 @@ export default class Undone extends React.Component<any, any> {
 
     // }
     componentDidMount() {
-        axios.get("http://localhost:8080/do/user/userAll").then(res=>{
+        axios.get("http://localhost:8080/userAll").then(res=>{
             console.log(res);
         });
     }
