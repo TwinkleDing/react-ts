@@ -31,22 +31,35 @@ export default class Login extends React.Component<any, any> {
 
     onFinish = (values: any) => {
         console.log(values);
-        axios.post("http://localhost:8080/userGet", {
-            username: values.username,
-            password: values.password
-        }).then((res: any) => {
-            if (res) {
-                const action = {
-                    type: "USER",
-                    value: res
-                };
+        if (this.state.login) {
+            axios.post("http://localhost:8080/userGet", {
+                username: values.username,
+                password: values.password
+            }).then((res: any) => {
+                if (res) {
+                    const action = {
+                        type: "USER",
+                        value: res
+                    };
 
-                store.dispatch(action);
-                this.props.history.push("/home");
-            } else {
-                console.log("账号不存在");
-            }
-        });
+                    store.dispatch(action);
+                    this.props.history.push("/home");
+                } else {
+                    console.log("账号不存在");
+                }
+            });
+        } else {
+            axios.post("http://localhost:8080/userAdd", {
+                username: values.regUsername,
+                password: values.regPassword
+            }).then((res: any) => {
+                if (res) {
+                    console.log("注册成功");
+                } else {
+                    console.log("注册失败");
+                }
+            });
+        }
     };
 
     onReset = () => {
