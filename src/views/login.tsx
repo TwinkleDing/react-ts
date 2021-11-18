@@ -45,7 +45,7 @@ export default class Login extends React.Component<any, any> {
                     store.dispatch(action);
                     this.props.history.push("/home");
                 } else {
-                    console.log("账号不存在");
+                    console.log("登录失败");
                 }
             });
         } else {
