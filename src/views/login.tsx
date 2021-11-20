@@ -30,12 +30,12 @@ export default class Login extends React.Component<any, any> {
 
 
     onFinish = (values: any) => {
-        console.log(values);
         if (this.state.login) {
             axios.post("http://localhost:8080/userGet", {
                 username: values.username,
                 password: values.password
             }).then((res: any) => {
+                console.log(res);
                 if (res) {
                     const action = {
                         type: "USER",
@@ -43,7 +43,7 @@ export default class Login extends React.Component<any, any> {
                     };
 
                     store.dispatch(action);
-                    this.props.history.push("/home");
+                    this.props.history.push("/undone");
                 } else {
                     console.log("登录失败");
                 }
@@ -53,6 +53,7 @@ export default class Login extends React.Component<any, any> {
                 username: values.regUsername,
                 password: values.regPassword
             }).then((res: any) => {
+                console.log(res);
                 if (res) {
                     console.log("注册成功");
                 } else {
