@@ -1,9 +1,9 @@
 import React from "react";
-import { Form, Input, Button, Row, Col } from "antd";
+import { Form, Input, Button, Row, Col, message } from "antd";
 import { FormInstance } from "antd/es/form";
 import "../css/login.scss";
 import store from "../store/index";
-import axios from "../router/axios";
+import request from "../utils/request";
 
 const layout = {
     labelCol: { span: 6 },
@@ -23,7 +23,7 @@ export default class Login extends React.Component<any, any> {
         this.formRef = React.createRef<FormInstance>();
     }
     componentDidMount() {
-        axios.get("http://localhost:8080/userAll").then(res => {
+        request.get("/userAll").then(res => {
             console.log(res);
         });
     }
@@ -31,7 +31,7 @@ export default class Login extends React.Component<any, any> {
 
     onFinish = (values: any) => {
         if (this.state.login) {
-            axios.post("http://localhost:8080/userGet", {
+            request.post("/userGet", {
                 username: values.username,
                 password: values.password
             }).then((res: any) => {
@@ -49,13 +49,20 @@ export default class Login extends React.Component<any, any> {
                 }
             });
         } else {
-            axios.post("http://localhost:8080/userAdd", {
+            if (values.regPassword !== values.regPasswordAgain) {
+                message.error("两次密码输入不一致！请重新输入");
+            }
+            request.post("http://localhost:8080/userAdd", {
                 username: values.regUsername,
                 password: values.regPassword
             }).then((res: any) => {
                 console.log(res);
                 if (res) {
                     console.log("注册成功");
+                    this.formRef.current!.resetFields();
+                    this.setState({
+                        login: true
+                    });
                 } else {
                     console.log("注册失败");
                 }
