@@ -13,7 +13,7 @@ const get = (url: string, params = {}) => {
 
 const post = (url: string, params = {}) => {
     return new Promise((resolve: any) => {
-        axios.post(`${service} + ${url}`, {
+        axios.post(`${service + url}`, {
             ...params
         }).then(res => {
             resolve(res);

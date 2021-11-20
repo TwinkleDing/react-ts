@@ -36,7 +36,7 @@ export default class Login extends React.Component<any, any> {
                 password: values.password
             }).then((res: any) => {
                 console.log(res);
-                if (res) {
+                if (res.data) {
                     const action = {
                         type: "USER",
                         value: res
@@ -45,14 +45,14 @@ export default class Login extends React.Component<any, any> {
                     store.dispatch(action);
                     this.props.history.push("/undone");
                 } else {
-                    console.log("登录失败");
+                    message.error("登录失败");
                 }
             });
         } else {
             if (values.regPassword !== values.regPasswordAgain) {
                 message.error("两次密码输入不一致！请重新输入");
             }
-            request.post("http://localhost:8080/userAdd", {
+            request.post("/userAdd", {
                 username: values.regUsername,
                 password: values.regPassword
             }).then((res: any) => {
@@ -64,7 +64,7 @@ export default class Login extends React.Component<any, any> {
                         login: true
                     });
                 } else {
-                    console.log("注册失败");
+                    message.error("注册失败");
                 }
             });
         }
