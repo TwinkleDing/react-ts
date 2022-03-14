@@ -36,6 +36,8 @@ $warn-color: #e6a23c;
     border-color: $warn-color;
 }
 
+// 引入公共样式动画
+@import './common.scss';
 
 // 引入自定义样式动画
 @import './transform.scss';

@@ -3,7 +3,6 @@ import { Form, Input, Button, Row, Col, message } from "antd";
 import { FormInstance } from "antd/es/form";
 import "../css/login.scss";
 import store from "../store/index";
-import request from "../utils/request";
 
 const layout = {
     labelCol: { span: 6 },
@@ -22,55 +21,29 @@ export default class Login extends React.Component<any, any> {
         };
         this.formRef = React.createRef<FormInstance>();
     }
-    componentDidMount() {
-        request.get("/userAll").then(res => {
-            console.log(res);
-        });
-    }
-
 
     onFinish = (values: any) => {
         if (this.state.login) {
-            request.post("/userGet", {
-                username: values.username,
-                password: values.password
-            }).then((res: any) => {
-                console.log(res);
-                if (res.data) {
-                    const action = {
-                        type: "USER",
-                        value: res
-                    };
+            const action = {
+                type: "USER",
+                value: values.username
+            };
 
-                    store.dispatch(action);
-                    this.props.history.push("/undone");
-                } else {
-                    message.error("登录失败");
-                }
-            });
+            store.dispatch(action);
+            this.props.history.push("/undone");
         } else {
             if (values.regPassword !== values.regPasswordAgain) {
                 message.error("两次密码输入不一致！请重新输入");
             }
-            request.post("/userAdd", {
-                username: values.regUsername,
-                password: values.regPassword
-            }).then((res: any) => {
-                console.log(res);
-                if (res) {
-                    console.log("注册成功");
-                    this.formRef.current!.resetFields();
-                    this.setState({
-                        login: true
-                    });
-                } else {
-                    message.error("注册失败");
-                }
+            message.info("注册成功");
+            this.formRef.current!.resetFields();
+            this.setState({
+                login: true
             });
         }
     };
 
-    onReset = () => {
+    backLogin = () => {
         this.setState({
             login: !this.state.login
         });
@@ -79,8 +52,8 @@ export default class Login extends React.Component<any, any> {
 
     render() {
         return (
-            <div className="login">
-                <div className={`login-box ${this.state.login ? "reg-login-box" : "login-reg-box"}`}>
+            <div className="login-page">
+                <div className={`login-page-box ${this.state.login ? "reg-login-box" : "login-reg-box"}`}>
                     <Form
                         name="control-ref"
                         ref={this.formRef}
@@ -108,7 +81,7 @@ export default class Login extends React.Component<any, any> {
                                     </Button>
                                 </Col>
                                 <Col span={6}>
-                                    <Button htmlType="button" onClick={this.onReset}>
+                                    <Button htmlType="button" onClick={this.backLogin}>
                                         {this.state.login ? "注册" : "返回登陆"}
                                     </Button>
                                 </Col>
