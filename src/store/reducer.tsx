@@ -1,5 +1,11 @@
 import { getStore, setStore } from "../utils/storage";
 import { PROJECT_NAME, LOCAL_STORAGE } from "../utils/common";
+import { ActionType } from "../interface";
+
+type StateType = {
+    user: ActionType,
+    avatar: ActionType
+}
 
 let defaultState = getStore({
     name: PROJECT_NAME,
@@ -8,13 +14,7 @@ let defaultState = getStore({
 
 defaultState = defaultState ? defaultState : {};
 
-interface StateType {
-    user: string,
-    avatar: string
-}
-
-
-export default (state: any = defaultState, action: any): StateType => {
+export default (state: any = defaultState, action: ActionType): StateType => {
     let newState: StateType = Object.assign({}, state);
 
     switch (action.type) {

@@ -1,27 +1,27 @@
 import React from "react";
 export type RouterType = {
-    path: string,
-    name: string,
-    component: any,
-    routes?: Array<any>
-}
+    path: string;
+    name: string;
+    component: any;
+    routes?: Array<any>;
+};
 
 export interface progressTableListType {
-    key: number,
-    userId: number,
-    userName: string,
-    workTime: number,
-    setting: any
+    key: number;
+    userId: number;
+    userName: string;
+    workTime: number;
+    setting: any;
 }
 
 export interface progressTableType {
-    selectedRowKeys: number[],
-    onSelectChange: any,
-    data: progressTableListType[]
+    selectedRowKeys: number[];
+    onSelectChange: any;
+    data: progressTableListType[];
 }
 
 export interface progressStateType {
-    selectedRowKeys: number[]
+    selectedRowKeys: number[];
 }
 
 export interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
@@ -38,3 +38,8 @@ export interface UndoneItem {
     age: number;
     address: string;
 }
+
+export type ActionType = {
+    type: string;
+    value: string;
+};

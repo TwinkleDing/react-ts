@@ -1,16 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Layout, Menu, Breadcrumb } from "antd";
-import { QuestionCircleOutlined, AlignLeftOutlined, DiffOutlined, UserSwitchOutlined, SettingOutlined, IssuesCloseOutlined } from "@ant-design/icons";
-import "../css/menu.scss";
+import {
+    QuestionCircleOutlined,
+    IssuesCloseOutlined,
+    UserSwitchOutlined,
+    AlignLeftOutlined,
+    SettingOutlined,
+    DiffOutlined
+} from "@ant-design/icons";
 import { currentPath } from "../utils/common";
+import store from "../store/index";
+import "../css/menu.scss";
 
 const { Header, Content, Footer, Sider } = Layout;
-
 
 export default class Menus extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
+        this.state = {
+            user: store.getState().user ? store.getState().user : ""
+        };
     }
     render() {
         return (
@@ -19,11 +29,10 @@ export default class Menus extends React.Component<any, any> {
                     <div className="logo" >
                         <div className="logo-img" />
                     </div>
-                    {/* <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
-                        <Menu.Item key="1">nav 1</Menu.Item>
-                        <Menu.Item key="2">nav 2</Menu.Item>
-                        <Menu.Item key="3">nav 3</Menu.Item>
-                    </Menu> */}
+                    <div className="header-user">
+                        <div className="avatar" />
+                        {this.state.user.value}
+                    </div>
                 </Header>
                 <Layout>
                     <Sider width={200} className="site-layout-background">

@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import request from "../utils/request";
 import { Divider, Table, Form, InputNumber, Input, Popconfirm as PopConfirm, Typography, Button } from "antd";
 import { EditableCellProps, UndoneItem } from "../interface";
 
@@ -53,14 +52,6 @@ export default class Undone extends React.Component<any, any> {
             form: React.createRef()
         };
 
-    }
-    // componentWillMount() {
-
-    // }
-    componentDidMount() {
-        request.get("/userAll").then(res=>{
-            console.log(res);
-        });
     }
 
     columns = [
