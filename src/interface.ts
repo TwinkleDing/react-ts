@@ -29,7 +29,7 @@ export interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     dataIndex: string;
     title: any;
     inputType: "number" | "text";
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export interface UndoneItem {

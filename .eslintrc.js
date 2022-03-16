@@ -1,49 +1,55 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "es2021": true
+    env: {
+        browser: true,
+        es2021: true
     },
-    "extends": [
-        "plugin:react/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "tsx": true
+    extends: ["plugin:react/recommended"],
+    parser: "@typescript-eslint/parser",
+    parserOptions: {
+        ecmaFeatures: {
+            tsx: true
         },
-        "ecmaVersion": 13,
-        "sourceType": "module"
+        ecmaVersion: 13,
+        sourceType: "module"
     },
-    "plugins": [
+    plugins: [
         "react",
         "@typescript-eslint",
         "@typescript-eslint/eslint-plugin"
     ],
-    "rules": { // 定义对象的set存取器属性时，强制定义get
+    rules: {
+        // 定义对象的set存取器属性时，强制定义get
         "accessor-pairs": 2,
         // 指定数组的元素之间要以空格隔开(,后面)， never参数：[ 之前和 ] 之后不能带空格，always参数：[ 之前和 ] 之后必须带空格
         "array-bracket-spacing": [2, "never"],
         // 在块级作用域外访问块内定义的变量是否报错提示
         "block-scoped-var": 0,
         // if while function 后面的{必须与if在同一行，java风格。
-        "brace-style": [2, "1tbs", {
-            "allowSingleLine": true
-        }],
+        "brace-style": [
+            2,
+            "1tbs",
+            {
+                allowSingleLine: true
+            }
+        ],
         // 双峰驼命名格式
-        "camelcase": 2,
+        camelcase: 2,
         // 数组和对象键值对最后一个逗号， never参数：不能带末尾的逗号, always参数：必须带末尾的逗号，
         // always-multiline：多行模式必须带逗号，单行模式不能带逗号
         "comma-dangle": [2, "never"],
         // 控制逗号前后的空格
-        "comma-spacing": [2, {
-            "before": false,
-            "after": true
-        }],
+        "comma-spacing": [
+            2,
+            {
+                before: false,
+                after: true
+            }
+        ],
         // 控制逗号在行尾出现还是在行首出现
         // http://eslint.org/docs/rules/comma-style
         "comma-style": [2, "last"],
         // 圈复杂度
-        "complexity": [2, 20],
+        complexity: [2, 20],
         // 以方括号取对象属性时，[ 后面和 ] 前面是否需要空格, 可选参数 never, always
         "computed-property-spacing": [2, "never"],
         // 强制方法必须返回值，TypeScript强类型，不配置
@@ -60,7 +66,7 @@ module.exports = {
         //    multi-or-nest 只有块中有多行语句时才需要{ }包围, 如果块中的执行语句只有一行，执行语句可以零另起一行也可以跟在if语句后面
         //    [2, "multi", "consistent"] 保持前后语句的{ }一致
         //    default: [2, "all"] 全都需要{ }包围
-        "curly": [2, "all"],
+        curly: [2, "all"],
         // switch语句强制default分支，也可添加 // no default 注释取消此次警告
         "default-case": 2,
         // 强制object.key 中 . 的位置，参数:
@@ -71,13 +77,16 @@ module.exports = {
         //    参数： allowKeywords：true 使用保留字做属性名时，只能使用.方式取属性
         //                          false 使用保留字做属性名时, 只能使用[]方式取属性 e.g [2, {"allowKeywords": false}]
         //           allowPattern:  当属性名匹配提供的正则表达式时，允许使用[]方式取值,否则只能用.号取值 e.g [2, {"allowPattern": "^[a-z]+(_[a-z]+)+$"}]
-        "dot-notation": [2, {
-            "allowKeywords": true
-        }],
+        "dot-notation": [
+            2,
+            {
+                allowKeywords: true
+            }
+        ],
         // 文件末尾强制换行
         "eol-last": 2,
         // 使用 === 替代 ==
-        "eqeqeq": [2, "allow-null"],
+        eqeqeq: [2, "allow-null"],
         // 方法表达式是否需要命名
         "func-names": 0,
         // 方法定义风格，参数：
@@ -133,9 +142,12 @@ module.exports = {
         "linebreak-style": [0, "windows"], //换行风格
         "no-multi-spaces": 1, //不能用多余的空格
         "no-multi-str": 2, //字符串不能用\换行
-        "no-multiple-empty-lines": [1, {
-            "max": 2
-        }], //空行最多不能超过2行
+        "no-multiple-empty-lines": [
+            1,
+            {
+                max: 2
+            }
+        ], //空行最多不能超过2行
         "no-native-reassign": 2, //不能重写native对象
         "no-negated-in-lhs": 2, //in 操作符的左边不能有!
         "no-nested-ternary": 0, //禁止使用嵌套的三目运算
@@ -176,17 +188,23 @@ module.exports = {
         "no-unneeded-ternary": 2, //禁止不必要的嵌套 var isYes = answer === 1 ? true : false;
         "no-unreachable": 2, //不能有无法执行的代码
         "no-unused-expressions": 2, //禁止无用的表达式
-        "no-unused-vars": [2, {
-            "vars": "all",
-            "args": "after-used"
-        }], //不能有声明后未被使用的变量或参数
+        "no-unused-vars": [
+            2,
+            {
+                vars: "all",
+                args: "after-used"
+            }
+        ], //不能有声明后未被使用的变量或参数
         "no-useless-call": 2, //禁止不必要的call和apply
         "no-void": 2, //禁用void操作符
         "no-var": 0, //禁用var，用let和const代替
-        "no-warning-comments": [1, {
-            "terms": ["todo", "fixme", "xxx"],
-            "location": "start"
-        }], //不能有警告备注
+        "no-warning-comments": [
+            1,
+            {
+                terms: ["todo", "fixme", "xxx"],
+                location: "start"
+            }
+        ], //不能有警告备注
         "no-with": 2, //禁用with
         "arrow-parens": 0, //箭头函数用小括号括起来
         "arrow-spacing": 0, //=>的前/后括号
@@ -195,10 +213,13 @@ module.exports = {
         "handle-callback-err": 0, //nodejs 处理错误
         "id-length": 0, //变量名长度
         "init-declarations": 0, //声明时必须赋初值
-        "key-spacing": [0, {
-            "beforeColon": false,
-            "afterColon": true
-        }], //对象字面量中冒号的前后空格
+        "key-spacing": [
+            0,
+            {
+                beforeColon: false,
+                afterColon: true
+            }
+        ], //对象字面量中冒号的前后空格
         "lines-around-comment": 0, //行前/行后备注
         "max-depth": [0, 4], //嵌套块深度
         "max-len": [0, 80, 4], //字符串最大长度
@@ -216,34 +237,40 @@ module.exports = {
         "prefer-const": 0, //首选const
         "prefer-spread": 0, //首选展开运算
         "prefer-reflect": 0, //首选Reflect的方法
-        "quotes": [1, "double"], //引号类型 `` "" ''
+        quotes: [1, "double"], //引号类型 `` "" ''
         "quote-props": [0, "always"], //对象字面量中的属性名是否强制双引号
-        "radix": 2, //parseInt必须指定第二个参数
+        radix: 2, //parseInt必须指定第二个参数
         "id-match": 0, //命名检测
         "require-yield": 0, //生成器函数必须有yield
-        "semi": [2, "always"], //语句强制分号结尾
-        "semi-spacing": [0, {
-            "before": false,
-            "after": true
-        }], //分号前后空格
+        semi: [2, "always"], //语句强制分号结尾
+        "semi-spacing": [
+            0,
+            {
+                before: false,
+                after: true
+            }
+        ], //分号前后空格
         "sort-vars": 0, //变量声明时排序
         "space-after-keywords": [0, "always"], //关键字后面是否要空一格
         "space-before-blocks": [0, "always"], //不以新行开始的块{前面要不要有空格
         "space-before-function-paren": [0, "always"], //函数定义时括号前面要不要有空格
         "space-in-parens": [0, "never"], //小括号里面要不要有空格
         "space-infix-ops": 0, //中缀操作符周围要不要有空格
-        "space-unary-ops": [0, {
-            "words": true,
-            "nonwords": false
-        }], //一元运算符的前/后要不要加空格
+        "space-unary-ops": [
+            0,
+            {
+                words: true,
+                nonwords: false
+            }
+        ], //一元运算符的前/后要不要加空格
         "spaced-comment": 0, //注释风格不要有空格什么的
-        "strict": 2, //使用严格模式
+        strict: 2, //使用严格模式
         "use-isnan": 2, //禁止比较时使用NaN，只能用isNaN()
         "valid-jsdoc": 0, //jsdoc规则
         "valid-typeof": 2, //必须使用合法的typeof的值
         "vars-on-top": 2, //var必须放在作用域顶部
         "wrap-iife": [2, "inside"], //立即执行函数表达式的小括号风格
         "wrap-regex": 0, //正则表达式字面量用小括号包起来
-        "yoda": [2, "never"] //禁止尤达条件
+        yoda: [2, "never"] //禁止尤达条件
     }
 };

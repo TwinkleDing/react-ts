@@ -1,9 +1,9 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu, Breadcrumb, Dropdown } from "antd";
 import {
     QuestionCircleOutlined,
-    IssuesCloseOutlined,
     UserSwitchOutlined,
     AlignLeftOutlined,
     SettingOutlined,
@@ -15,14 +15,67 @@ import "../css/menu.scss";
 
 const { Header, Content, Footer, Sider } = Layout;
 
-export default class Menus extends React.Component<any, any> {
+interface routerList {
+    name: string
+    icon: string
+    key: string
+    router: string
+}
+
+class Menus extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state = {
-            user: store.getState().user ? store.getState().user : ""
+            routerList: [
+                {
+                    name: "我的任务",
+                    icon: QuestionCircleOutlined,
+                    key: "undone",
+                    router: "/undone"
+                },
+                {
+                    name: "发起任务",
+                    icon: DiffOutlined,
+                    key: "task",
+                    router: "/task"
+                },
+                {
+                    name: "查看进度",
+                    icon: AlignLeftOutlined,
+                    key: "progress",
+                    router: "/progress"
+                },
+                {
+                    name: "人员管理",
+                    icon: UserSwitchOutlined,
+                    key: "management",
+                    router: "/management"
+                },
+                {
+                    name: "我的信息",
+                    icon: SettingOutlined,
+                    key: "my",
+                    router: "/my"
+                }
+            ]
         };
     }
+    handleClick = (e: any) => {
+        this.props.history.push(e.key);
+    }
+    list() {
+        return this.state.routerList.map((item: routerList) => {
+            return <Menu.Item key={item.key} icon={<item.icon />}>
+                {item.name}
+            </Menu.Item>;
+        });
+    }
     render() {
+        const currentRoute: routerList = this.state.routerList.filter((item: any) => {
+            return window.location.hash.includes(item.router) ? item.key : "";
+        })[0];
+        const current: string = currentRoute ? currentRoute.key : "undone";
+
         return (
             <Layout className="app-content">
                 <Header className="header">
@@ -30,42 +83,22 @@ export default class Menus extends React.Component<any, any> {
                         <div className="logo-img" />
                     </div>
                     <div className="header-user">
-                        <div className="avatar" />
-                        {this.state.user.value}
+                        <AvatarMenus />
                     </div>
                 </Header>
                 <Layout>
                     <Sider width={200} className="site-layout-background">
                         <Menu
+                            onClick={this.handleClick}
+                            selectedKeys={[current]}
                             mode="inline"
                             defaultSelectedKeys={[currentPath ? currentPath : "undone"]}
                             style={{ height: "100%", borderRight: 0 }}>
-                            <Menu.Item key="undone" icon={<QuestionCircleOutlined />}>
-                                <Link to="/undone">未完成的</Link>
-                            </Menu.Item>
-                            <Menu.Item key="task" icon={<DiffOutlined />}>
-                                <Link to="/task">发起任务</Link>
-                            </Menu.Item>
-                            <Menu.Item key="progress" icon={<AlignLeftOutlined />}>
-                                <Link to="/progress">查看进度</Link>
-                            </Menu.Item>
-                            <Menu.Item key="management" icon={<UserSwitchOutlined />}>
-                                <Link to="/management">人员管理</Link>
-                            </Menu.Item>
-                            <Menu.Item key="my" icon={<SettingOutlined />}>
-                                <Link to="/my">我的信息</Link>
-                            </Menu.Item>
-                            <Menu.Item key="login" icon={<IssuesCloseOutlined />}>
-                                <Link to="/login">退出登录</Link>
-                            </Menu.Item>
+                            {this.list()}
                         </Menu>
                     </Sider>
                     <Layout style={{ padding: "0 24px 24px" }}>
-                        <Breadcrumb style={{ margin: "16px 0" }}>
-                            {/* <Breadcrumb.Item>Home</Breadcrumb.Item>
-                            <Breadcrumb.Item>List</Breadcrumb.Item>
-                            <Breadcrumb.Item>App</Breadcrumb.Item> */}
-                        </Breadcrumb>
+                        <Breadcrumb style={{ margin: "16px 0" }} />
                         <Content
                             className="site-layout-background"
                             style={{
@@ -82,3 +115,46 @@ export default class Menus extends React.Component<any, any> {
         );
     }
 }
+
+interface avatarMenu {
+    name: string,
+    router: string
+}
+
+class AvatarMenus extends React.Component<any, any> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            user: store.getState().user ? store.getState().user : "",
+            avatarMenus: [{
+                name: "我的信息",
+                router: "/my"
+            }, {
+                name: "退出登录",
+                router: "/login"
+            }]
+        };
+    }
+    list() {
+        return this.state.avatarMenus.map((item: avatarMenu, index: number) => {
+            return <Menu.Item key={index}>
+                <Link to={item.router}>{item.name}</Link>
+            </Menu.Item>;
+        });
+    }
+    render() {
+        const menu =
+            <Menu>
+                {this.list()}
+            </Menu>;
+
+        return <Dropdown overlay={menu} placement="bottomLeft">
+            <div>
+                <div className="avatar" />
+                {this.state.user.value}
+            </div>
+        </Dropdown>;
+    }
+}
+
+export default withRouter(Menus);
