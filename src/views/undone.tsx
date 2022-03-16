@@ -9,7 +9,8 @@ import {
     Popconfirm as PopConfirm,
     Typography,
     Button,
-    Checkbox
+    Checkbox,
+    Image
 } from "antd";
 import { MinusCircleOutlined } from "@ant-design/icons";
 import { EditableCellProps, UndoneItem } from "../interface";
@@ -263,8 +264,12 @@ class Undone extends React.Component<any, any> {
                 <div className="undone-tab">
                     <TodoList />
                     <div>
-                        <Divider orientation="left">待完成的任务</Divider>
+                        <Divider orientation="left">掌握技能</Divider>
                         <ChartTab option={this.option} renderer="svg" />
+                    </div>
+                    <div>
+                        <Divider orientation="left">期待的游戏</Divider>
+                        <LookingGames />
                     </div>
                 </div>
             </div>
@@ -352,11 +357,74 @@ class TodoList extends React.Component<any, any> {
     render() {
         return (
             <div className="todo-list">
-                <Divider orientation="left">Todo-List</Divider>
+                <Divider orientation="left">待办事项</Divider>
                 {this.list()}
             </div>
         );
     }
 }
 
+interface GameItem {
+    name: string;
+    price: number;
+    platform: string;
+    time: string;
+    img: any
+}
+
+import Kirby from "@/assets/Kirby.jpg";
+import Zelda from "@/assets/Zelda.webp";
+import Pokemon from "@/assets/Pokemon.webp";
+
+class LookingGames extends React.Component<any, any> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            gameList: [
+                {
+                    name: "星之卡比-探索发现",
+                    price: 325,
+                    platform: "switch",
+                    time: "2022-03-25",
+                    img: Kirby
+                },
+                {
+                    name: "塞尔达-旷野之息2",
+                    price: 375,
+                    platform: "switch",
+                    time: "2022-12-25",
+                    img: Zelda
+                },
+                {
+                    name: "宝可梦朱紫",
+                    price: 355,
+                    platform: "switch",
+                    time: "2022-12-20",
+                    img: Pokemon
+                }
+            ]
+        };
+    }
+    list() {
+        return this.state.gameList.map((item: GameItem, index: number) => {
+            return <div className="games-item" key={index}>
+                <Image
+                    width={80}
+                    height={80}
+                    src={item.img}
+                    preview={false}
+                    alt="" />
+                <div>
+                    <div className="games-title">{item.name}</div>
+                    <div>发行价格：<b>{item.price}</b></div>
+                    <div>发行平台：<b>{item.platform}</b></div>
+                    <div>发行时间：<b>{item.time}</b></div>
+                </div>
+            </div>;
+        });
+    }
+    render() {
+        return <div className="looking-games">{this.list()}</div>;
+    }
+}
 export default Undone;
