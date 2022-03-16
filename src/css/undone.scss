@@ -30,6 +30,9 @@
                     cursor: pointer;
                 }
             }
+            .not-active {
+                color: #666;
+            }
             .todo-active {
                 color: $highlight-color;
             }

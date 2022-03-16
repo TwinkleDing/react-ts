@@ -15,6 +15,9 @@ import {
 import { MinusCircleOutlined } from "@ant-design/icons";
 import { EditableCellProps, UndoneItem } from "../interface";
 import ChartTab from "../components/ChartTab";
+import Kirby from "@/assets/Kirby.jpg";
+import Zelda from "@/assets/Zelda.webp";
+import Pokemon from "@/assets/Pokemon.webp";
 
 const originData: UndoneItem[] = [];
 
@@ -164,12 +167,21 @@ class Undone extends React.Component<any, any> {
                             <Button type="link">Cancel</Button>
                         </PopConfirm>
                     </span> :
-                    <Typography.Link
-                        disabled={this.state.editingKey !== ""}
-                        onClick={() => this.edit(record)}
-                    >
-                        Edit
-                    </Typography.Link>
+                    <span>
+                        <Typography.Link
+                            disabled={this.state.editingKey !== ""}
+                            onClick={() => this.edit(record)}
+                        >
+                            Edit
+                        </Typography.Link>
+                        <Button
+                            type="link"
+                            onClick={() => this.save(record.key)}
+                            style={{ marginRight: 8 }}
+                        >
+                            Over
+                        </Button>
+                    </span>
                     ;
             }
         }
@@ -342,7 +354,7 @@ class TodoList extends React.Component<any, any> {
                 <div className="todo-item" key={index}>
                     <Checkbox
                         checked={item.status === 1}
-                        className={`${item.status === 1 ? "todo-active" : ""}`}
+                        className={`${item.status === 1 ? "todo-active" : "not-active"}`}
                         onChange={(e) => this.onChange(e, index)}
                     >
                         {item.title}
@@ -372,9 +384,6 @@ interface GameItem {
     img: any
 }
 
-import Kirby from "@/assets/Kirby.jpg";
-import Zelda from "@/assets/Zelda.webp";
-import Pokemon from "@/assets/Pokemon.webp";
 
 class LookingGames extends React.Component<any, any> {
     constructor(props: any) {
