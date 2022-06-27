@@ -3,6 +3,7 @@ import { Form, Input, Button, Row, Col, message } from "antd";
 import { FormInstance } from "antd/es/form";
 import "../css/login.scss";
 import store from "../store/index";
+import request from "../utils/request";
 
 const layout = {
     labelCol: { span: 6 },
@@ -30,16 +31,29 @@ export default class Login extends React.Component<any, any> {
             };
 
             store.dispatch(action);
-            this.props.history.push("/undone");
+            // this.props.history.push("/undone");
+            request.post("/userGet", {
+                username: values.username,
+                password: values.password
+            }).then((res: any) => {
+                console.log(res);
+            });
         } else {
             if (values.regPassword !== values.regPasswordAgain) {
                 message.error("两次密码输入不一致！请重新输入");
             }
-            message.info("注册成功");
-            this.formRef.current!.resetFields();
-            this.setState({
-                login: true
+            console.log(values);
+            request.post("/userAdd", {
+                username: values.regUsername,
+                password: values.regPassword
+            }).then((res: any) => {
+                console.log(res);
             });
+            // message.info("注册成功");
+            // this.formRef.current!.resetFields();
+            // this.setState({
+            //     login: true
+            // });
         }
     };
 

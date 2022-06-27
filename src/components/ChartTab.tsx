@@ -22,7 +22,7 @@ class ChartTab extends PureComponent<any, any>{
         // window.addEventListener('resize')
     }
     componentWillUnmount() {
-        this.disPose();
+        // this.disPose();
     }
 
     initChart(el: any) {
