@@ -3,7 +3,7 @@ import { Form, Input, Button, Row, Col, message } from "antd";
 import { FormInstance } from "antd/es/form";
 import "../css/login.scss";
 import store from "../store/index";
-import request from "../utils/request";
+import LoginApi from "@/api/login";
 
 const layout = {
     labelCol: { span: 6 },
@@ -25,35 +25,43 @@ export default class Login extends React.Component<any, any> {
 
     onFinish = (values: any) => {
         if (this.state.login) {
-            const action = {
-                type: "USER",
-                value: values.username
-            };
 
-            store.dispatch(action);
-            // this.props.history.push("/undone");
-            request.post("/userGet", {
-                username: values.username,
-                password: values.password
+            LoginApi.login({
+                user_id: values.username,
+                user_pwd: values.password
             }).then((res: any) => {
-                console.log(res);
+                if (res.code === 200) {
+                    const action = {
+                        type: "USER",
+                        value: values.username
+                    };
+
+                    message.success(res.msg);
+                    store.dispatch(action);
+                    this.props.history.push("/undone");
+                } else {
+                    message.warning(res.msg);
+                }
             });
         } else {
             if (values.regPassword !== values.regPasswordAgain) {
                 message.error("两次密码输入不一致！请重新输入");
             }
-            console.log(values);
-            request.post("/userAdd", {
-                username: values.regUsername,
-                password: values.regPassword
+            LoginApi.register({
+                user_name: values.regUsername,
+                user_id: values.regUserId,
+                user_pwd: values.regPassword
             }).then((res: any) => {
-                console.log(res);
+                if (res.code === 200) {
+                    message.success(res.msg);
+                    this.formRef.current!.resetFields();
+                    this.setState({
+                        login: true
+                    });
+                } else {
+                    message.warning(res.msg);
+                }
             });
-            // message.info("注册成功");
-            // this.formRef.current!.resetFields();
-            // this.setState({
-            //     login: true
-            // });
         }
     };
 
@@ -113,8 +121,14 @@ function Register(props: any) {
     return (
         <div>
             <Form.Item
-                label="工号"
+                label="姓名"
                 name="regUsername"
+                rules={[{ required: !props.login, message: "请输入姓名!" }]}>
+                <Input />
+            </Form.Item>
+            <Form.Item
+                label="工号"
+                name="regUserId"
                 rules={[{ required: !props.login, message: "请输入工号!" }]}>
                 <Input />
             </Form.Item>
