@@ -1,7 +1,17 @@
 import React from "react";
 import { Divider, Descriptions } from "antd";
+import MyApi from "@/api/my";
 
 export default class My extends React.Component {
+
+    componentDidMount() {
+        console.log("componentDidMount()");
+        MyApi.getList().then((res: any) => {
+            console.log(res);
+
+        });
+    }
+
     public render() {
         return (
             <div className="my">

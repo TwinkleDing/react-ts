@@ -2,7 +2,7 @@ import axios from "axios";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { serialize } from "../utils/common";
-
+import store from "@/store/index";
 // 设置超时时间
 axios.defaults.timeout = 100000;
 //返回其他状态吗
@@ -22,10 +22,12 @@ axios.interceptors.request.use(
         const meta = config.meta || {};
 
         config.headers["Content-Type"] = "application/json;charset=utf-8";
-        // if(store.getters.loginIn) {
-        //     config.headers.Authorization = store.getters.userInfo.token;
-        //     config.headers.accessToken = store.getters.userInfo.token;
-        // }
+        const token: string = store.getState()?.token?.value || "";
+
+        if (token) {
+            config.headers.Authorization = token;
+            config.headers.accessToken = token;
+        }
         //headers中配置serialize为true开启序列化
         if (config.method === "post" && meta.isSerialize === true) {
             config.data = serialize(config.data);

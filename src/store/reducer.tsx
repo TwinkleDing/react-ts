@@ -4,7 +4,8 @@ import { ActionType } from "../interface";
 
 type StateType = {
     user: ActionType,
-    avatar: ActionType
+    avatar: ActionType,
+    token: ActionType
 }
 
 let defaultState = getStore({
@@ -23,6 +24,9 @@ export default (state: any = defaultState, action: ActionType): StateType => {
             break;
         case "AVATAR":
             newState.avatar = action;
+            break;
+        case "TOKEN":
+            newState.token = action;
             break;
         default:
             console.log(newState);

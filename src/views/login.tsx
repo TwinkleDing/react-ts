@@ -31,13 +31,18 @@ export default class Login extends React.Component<any, any> {
                 user_pwd: values.password
             }).then((res: any) => {
                 if (res.code === 200) {
-                    const action = {
+                    const userName = {
                         type: "USER",
                         value: values.username
                     };
+                    const token = {
+                        type: "TOKEN",
+                        value: res.data.token
+                    };
 
                     message.success(res.msg);
-                    store.dispatch(action);
+                    store.dispatch(userName);
+                    store.dispatch(token);
                     this.props.history.push("/undone");
                 } else {
                     message.warning(res.msg);
