@@ -9,7 +9,7 @@ export default class HttpRequest {
     static get(url: string, params = {}) {
         return new Promise((resolve: any) => {
             axios.get(`${service + url}`, {
-                ...params
+                params
             }).then((res: any) => {
                 resolve(res);
             });
