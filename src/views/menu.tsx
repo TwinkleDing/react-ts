@@ -151,7 +151,7 @@ class AvatarMenus extends React.Component<any, any> {
         return <Dropdown overlay={menu} placement="bottomLeft">
             <div>
                 <div className="avatar" />
-                {this.state.user.value.user_name}
+                {this.state.user?.value?.userName}
             </div>
         </Dropdown>;
     }
