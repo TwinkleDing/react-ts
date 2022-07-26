@@ -43,3 +43,8 @@ export type ActionType = {
     type: string;
     value: string;
 };
+
+export type UserInfo = {
+    type: string;
+    value: any
+};

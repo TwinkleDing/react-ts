@@ -27,13 +27,13 @@ export default class Login extends React.Component<any, any> {
         if (this.state.login) {
 
             LoginApi.login({
-                user_id: values.username,
-                user_pwd: values.password
+                userId: values.username,
+                password: values.password
             }).then((res: any) => {
                 if (res.code === 200) {
-                    const userName = {
-                        type: "USER",
-                        value: values.username
+                    const user = {
+                        type: "USER_INFO",
+                        value: res.data
                     };
                     const token = {
                         type: "TOKEN",
@@ -41,7 +41,7 @@ export default class Login extends React.Component<any, any> {
                     };
 
                     message.success(res.msg);
-                    store.dispatch(userName);
+                    store.dispatch(user);
                     store.dispatch(token);
                     this.props.history.push("/undone");
                 } else {
@@ -53,9 +53,9 @@ export default class Login extends React.Component<any, any> {
                 message.error("两次密码输入不一致！请重新输入");
             }
             LoginApi.register({
-                user_name: values.regUsername,
-                user_id: values.regUserId,
-                user_pwd: values.regPassword
+                userName: values.regUsername,
+                userId: values.regUserId,
+                password: values.regPassword
             }).then((res: any) => {
                 if (res.code === 200) {
                     message.success(res.msg);

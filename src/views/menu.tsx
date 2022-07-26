@@ -125,7 +125,7 @@ class AvatarMenus extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state = {
-            user: store.getState().user ? store.getState().user : "",
+            user: store.getState()?.userInfo || {},
             avatarMenus: [{
                 name: "我的信息",
                 router: "/my"
@@ -151,7 +151,7 @@ class AvatarMenus extends React.Component<any, any> {
         return <Dropdown overlay={menu} placement="bottomLeft">
             <div>
                 <div className="avatar" />
-                {this.state.user.value}
+                {this.state.user.value.user_name}
             </div>
         </Dropdown>;
     }
