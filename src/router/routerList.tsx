@@ -1,8 +1,8 @@
-import Undone from "../views/undone";
-import Progress from "../views/progress";
-import Task from "../views/task";
-import Management from "../views/management";
-import My from "../views/my";
+import Undone from "@/views/undone";
+import Progress from "@/views/progress";
+import Task from "@/views/task";
+import Management from "@/views/management";
+import My from "@/views/my";
 
 const routerList = [
     {

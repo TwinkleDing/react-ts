@@ -1,6 +1,6 @@
-import { getStore, setStore } from "../utils/storage";
-import { PROJECT_NAME, LOCAL_STORAGE } from "../utils/common";
-import { ActionType, UserInfo } from "../interface";
+import { getStore, setStore } from "@/utils/storage";
+import { PROJECT_NAME, LOCAL_STORAGE } from "@/utils/common";
+import { ActionType, UserInfo } from "@/interface";
 
 type StateType = {
     userInfo: UserInfo,

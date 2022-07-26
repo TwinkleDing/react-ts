@@ -3,11 +3,11 @@ import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 import { ConfigProvider } from "antd";
 import zhCN from "antd/lib/locale/zh_CN";
 import routerList from "./routerList";
-import Login from "../views/login";
-import store from "../store/index";
-import Menus from "../views/menu";
-import { RouterType } from "../interface";
-import { currentPath } from "../utils/common";
+import Login from "@/views/login";
+import store from "@/store/index";
+import Menus from "@/views/menu";
+import { RouterType } from "@/interface";
+import { currentPath } from "@/utils/common";
 
 const user: string = store.getState()?.userInfo?.value?.userName || "";
 

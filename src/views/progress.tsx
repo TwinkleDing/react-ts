@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Divider, Table, Empty, Button, Popconfirm as PopConfirm } from "antd";
-import { progressTableListType, progressTableType, progressStateType } from "../interface";
+import { progressTableListType, progressTableType, progressStateType } from "@/interface";
 
 const columns = [
     {

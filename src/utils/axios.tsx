@@ -1,8 +1,10 @@
 import axios from "axios";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
-import { serialize } from "../utils/common";
+import { serialize } from "@/utils/common";
 import store from "@/store/index";
+import { PROJECT_NAME, LOCAL_STORAGE } from "@/utils/common";
+import { setStore } from "@/utils/storage";
 // 设置超时时间
 axios.defaults.timeout = 100000;
 //返回其他状态吗
@@ -50,7 +52,12 @@ axios.interceptors.response.use(
         //如果是401则跳转到登录页面
 
         if (status === 401) {
-            // router.push({ path: "/login" });
+            window.location.href = "login";
+            setStore({
+                name: PROJECT_NAME,
+                type: LOCAL_STORAGE,
+                content: {}
+            });
         }
         // 如果请求为非200否者默认统一处理
         if (status !== 200) {
