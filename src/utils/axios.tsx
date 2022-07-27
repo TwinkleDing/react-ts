@@ -52,7 +52,7 @@ axios.interceptors.response.use(
         //如果是401则跳转到登录页面
 
         if (status === 401) {
-            window.location.href = "login";
+            window.location.hash = "login";
             setStore({
                 name: PROJECT_NAME,
                 type: LOCAL_STORAGE,
