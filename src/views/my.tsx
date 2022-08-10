@@ -10,7 +10,8 @@ import {
     InputNumber,
     Radio,
     Upload,
-    Select
+    Select,
+    Modal
 } from "antd";
 const token: string = store.getState()?.token?.value || "";
 
@@ -29,65 +30,71 @@ const normFile = (e: any) => {
     return e?.fileList;
 };
 
+const getBase64 = (file: RcFile): Promise<string> =>
+    new Promise((resolve, reject) => {
+        const reader = new FileReader();
 
-const My: React.FC = () => {
-    const [info, setInfo] = useState<any>({
-        userName: "",
-        userId: "",
-        department: "",
-        position: ""
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = error => reject(error);
     });
 
-    const [fileList, setFileList] = useState<UploadFile[]>([
-        {
-            uid: "-1",
-            name: "image.png",
-            status: "done",
-            url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        }
-    ]);
+
+const My: React.FC = () => {
+    const [form] = Form.useForm();
+    const [userId] = useState(store.getState()?.userInfo.value.userId);
+
+    const [fileList, setFileList] = useState<UploadFile[]>([]);
+    const [previewVisible, setPreviewVisible] = useState(false);
+    const [previewImage, setPreviewImage] = useState("");
+    const [previewTitle, setPreviewTitle] = useState("");
+    const handleCancel = () => setPreviewVisible(false);
 
     useEffect(() => {
-        const userId = store.getState()?.userInfo.value.userId;
-
+        // 获取我的信息
         MyApi.getInfo({ userId }).then((res: any) => {
-            setInfo({ ...res.data });
+            form.setFieldsValue(res.data);
+            setFileList([res.data.avatar]);
         });
     }, []);
 
+    // 表格提交事件
     const onFinish = (values: any) => {
-        console.log("Received values of form: ", values);
+        const params = { ...values, userId };
+
+        MyApi.update(params).then((res: any) => {
+            console.log(res);
+
+        });
+
     };
-    const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-        setFileList(newFileList);
-    };
 
-    const onPreview = async (file: UploadFile) => {
-        let src = file.url as string;
-
-        if (!src) {
-            src = await new Promise(resolve => {
-                const reader = new FileReader();
-
-                reader.readAsDataURL(file.originFileObj as RcFile);
-                reader.onload = () => resolve(reader.result as string);
-            });
+    // 图片上传事件
+    const onChange: UploadProps["onChange"] = (res) => {
+        setFileList(res.fileList);
+        if (res.file.status === "done" && res.file.response?.code === 200) {
+            form.setFieldsValue({ ...form, avatar: res.file.response.data });
         }
-        const image = new Image();
+    };
 
-        image.src = src;
-        const imgWindow = window.open(src);
+    // 图片预览
+    const handlePreview = async (file: UploadFile) => {
+        if (!file.url && !file.preview) {
+            file.preview = await getBase64(file.originFileObj as RcFile);
+        }
 
-        imgWindow?.document.write(image.outerHTML);
+        setPreviewImage(file.url || file.preview as string);
+        setPreviewVisible(true);
+        setPreviewTitle(file.name || file.url!.substring(file.url!.lastIndexOf("/") + 1));
     };
 
 
     return (
         <Form
+            form={form}
             name="validate_other"
             {...formItemLayout}
             onFinish={onFinish}
-            initialValues={info}
         >
             <Form.Item
                 name="userName"
@@ -138,11 +145,10 @@ const My: React.FC = () => {
             </Form.Item>
 
             <Form.Item
-                name="upload"
-                label="Upload"
+                name="avatar"
+                label="头像"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                extra="头像"
             >
                 <ImgCrop rotate>
                     <Upload
@@ -150,22 +156,25 @@ const My: React.FC = () => {
                         listType="picture-card"
                         fileList={fileList}
                         onChange={onChange}
-                        onPreview={onPreview}
+                        onPreview={handlePreview}
                         headers={{
                             "Authorization": token
                         }}
                     >
-                        {fileList.length < 2 && "+ Upload"}
+                        {fileList.length < 1 && "+ Upload"}
                     </Upload>
                 </ImgCrop>
             </Form.Item>
-
-
             <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                 <Button type="primary" htmlType="submit">
                     Submit
                 </Button>
             </Form.Item>
+
+            {/* 图片预览的模态窗 */}
+            <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
+                <img alt="example" style={{ width: "100%" }} src={previewImage} />
+            </Modal>
         </Form >
     );
 };
