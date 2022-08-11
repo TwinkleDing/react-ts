@@ -143,6 +143,8 @@ class AvatarMenus extends React.Component<any, any> {
         });
     }
     render() {
+        const avatar = store.getState()?.userInfo?.value.avatar;
+
         const menu =
             <Menu>
                 {this.list()}
@@ -150,7 +152,7 @@ class AvatarMenus extends React.Component<any, any> {
 
         return <Dropdown overlay={menu} placement="bottomLeft">
             <div>
-                <div className="avatar" />
+                <img className="avatar" src={avatar} />
                 {this.state.user?.value?.userName}
             </div>
         </Dropdown>;

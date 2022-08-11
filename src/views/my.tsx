@@ -11,7 +11,8 @@ import {
     Radio,
     Upload,
     Select,
-    Modal
+    Modal,
+    message
 } from "antd";
 const token: string = store.getState()?.token?.value || "";
 
@@ -42,7 +43,7 @@ const getBase64 = (file: RcFile): Promise<string> =>
 
 const My: React.FC = () => {
     const [form] = Form.useForm();
-    const [userId] = useState(store.getState()?.userInfo.value.userId);
+    const [userId] = useState(store.getState()?.userInfo?.value.userId);
 
     const [fileList, setFileList] = useState<UploadFile[]>([]);
     const [previewVisible, setPreviewVisible] = useState(false);
@@ -63,10 +64,12 @@ const My: React.FC = () => {
         const params = { ...values, userId };
 
         MyApi.update(params).then((res: any) => {
-            console.log(res);
-
+            if (res.status === 200) {
+                message.success(res.msg);
+            } else {
+                message.error(res.msg);
+            }
         });
-
     };
 
     // 图片上传事件

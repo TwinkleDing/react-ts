@@ -9,7 +9,7 @@ import Menus from "@/views/menu";
 import { RouterType } from "@/interface";
 import { currentPath } from "@/utils/common";
 
-const user: string = store.getState()?.userInfo?.value?.userName || "";
+const user: string = store.getState()?.userInfo?.value?.userId || "";
 
 function Routes() {
     return (
