@@ -65,6 +65,12 @@ const My: React.FC = () => {
 
         MyApi.update(params).then((res: any) => {
             if (res.status === 200) {
+                const user = {
+                    type: "USER_INFO",
+                    value: res.data
+                };
+
+                store.dispatch(user);
                 message.success(res.msg);
             } else {
                 message.error(res.msg);
