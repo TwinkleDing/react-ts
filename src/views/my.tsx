@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import store from "@/store/index";
-import MyApi from "@/api/my";
+import MyApi from "@/api/MyApi";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
 import ImgCrop from "antd-img-crop";
 import {
