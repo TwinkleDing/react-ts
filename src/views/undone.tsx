@@ -13,8 +13,8 @@ import {
     Image
 } from "antd";
 import { MinusCircleOutlined } from "@ant-design/icons";
-import { EditableCellProps, UndoneItem } from "../interface";
-import ChartTab from "../components/ChartTab";
+import { EditableCellProps, UndoneItem } from "@/interface";
+import ChartTab from "@/components/ChartTab";
 import Kirby from "@/assets/Kirby.jpg";
 import Zelda from "@/assets/Zelda.webp";
 import Pokemon from "@/assets/Pokemon.webp";

@@ -15,14 +15,14 @@ function Routes() {
     return (
         <ConfigProvider locale={zhCN}>
             <Router>
-                <Suspense fallback={<Spin />}>
-                    {
-                        user === "" ? <Redirect to="/login" /> : currentPath === "" ? <Redirect to="/undone" /> : ""
-                    }
-                    {
-                        <Switch>
-                            <Route exact path="/login" component={Login} />
-                            <Menus content={
+                {
+                    user === "" ? <Redirect to="/login" /> : currentPath === "" ? <Redirect to="/undone" /> : ""
+                }
+                {
+                    <Switch>
+                        <Route exact path="/login" component={Login} />
+                        <Menus content={
+                            <Suspense fallback={<Spin />}>
                                 <Switch>
                                     {
                                         routerList.map((router: RouterType, index: number) =>
@@ -37,10 +37,10 @@ function Routes() {
                                         )
                                     }
                                 </Switch>
-                            } />
-                        </Switch>
-                    }
-                </Suspense>
+                            </Suspense>
+                        } />
+                    </Switch>
+                }
             </Router>
         </ConfigProvider>
     );
