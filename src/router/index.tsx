@@ -1,6 +1,6 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, Spin } from "antd";
 import zhCN from "antd/lib/locale/zh_CN";
 import routerList from "./routerList";
 import Login from "@/views/login";
@@ -15,30 +15,32 @@ function Routes() {
     return (
         <ConfigProvider locale={zhCN}>
             <Router>
-                {
-                    user === "" ? <Redirect to="/login" /> : currentPath === "" ? <Redirect to="/undone" /> : ""
-                }
-                {
-                    <Switch>
-                        <Route exact path="/login" component={Login} />
-                        <Menus content={
-                            <Switch>
-                                {
-                                    routerList.map((router: RouterType, index: number) =>
-                                        <Route
-                                            exact
-                                            key={index}
-                                            path={router.path}
-                                            render={
-                                                props => <router.component name={router.name} routes={router.routes} {...props} />
-                                            }>
-                                        </Route>
-                                    )
-                                }
-                            </Switch>
-                        } />
-                    </Switch>
-                }
+                <Suspense fallback={<Spin />}>
+                    {
+                        user === "" ? <Redirect to="/login" /> : currentPath === "" ? <Redirect to="/undone" /> : ""
+                    }
+                    {
+                        <Switch>
+                            <Route exact path="/login" component={Login} />
+                            <Menus content={
+                                <Switch>
+                                    {
+                                        routerList.map((router: RouterType, index: number) =>
+                                            <Route
+                                                exact
+                                                key={index}
+                                                path={router.path}
+                                                render={
+                                                    props => <router.component name={router.name} routes={router.routes} {...props} />
+                                                }>
+                                            </Route>
+                                        )
+                                    }
+                                </Switch>
+                            } />
+                        </Switch>
+                    }
+                </Suspense>
             </Router>
         </ConfigProvider>
     );

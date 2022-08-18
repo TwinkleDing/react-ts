@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import store from "@/store/index";
-import MyApi from "@/api/MyApi";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
 import ImgCrop from "antd-img-crop";
 import {
@@ -14,15 +12,15 @@ import {
     Modal,
     message
 } from "antd";
-const token: string = store.getState()?.token?.value || "";
+import store from "@/store/index";
+import MyApi from "@/api/MyApi";
+import { getBase64 } from "@/utils/tools";
 
 const { Option } = Select;
-
 const formItemLayout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 14 }
 };
-
 const normFile = (e: any) => {
     console.log("Upload event:", e);
     if (Array.isArray(e)) {
@@ -31,17 +29,8 @@ const normFile = (e: any) => {
     return e?.fileList;
 };
 
-const getBase64 = (file: RcFile): Promise<string> =>
-    new Promise((resolve, reject) => {
-        const reader = new FileReader();
-
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = error => reject(error);
-    });
-
-
 const My: React.FC = () => {
+    const token: string = store.getState()?.token?.value || "";
     const [form] = Form.useForm();
     const [userId] = useState(store.getState()?.userInfo?.value.userId);
 
