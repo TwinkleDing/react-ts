@@ -1,4 +1,4 @@
-import HttpRequest from "./index";
+import HttpRequest from "../index";
 
 export default class LoginApi extends HttpRequest {
 	static login = (data: any) => this.post("/user/login", data);

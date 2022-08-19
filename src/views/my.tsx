@@ -13,7 +13,7 @@ import {
     message
 } from "antd";
 import store from "@/store/index";
-import MyApi from "@/api/MyApi";
+import MyApi from "@/api/modules/MyApi";
 import { getBase64 } from "@/utils/tools";
 
 const { Option } = Select;
@@ -136,9 +136,9 @@ const My: React.FC = () => {
                 rules={[{ required: true, message: "请选择部门!" }]}
             >
                 <Select placeholder="请选择部门!">
-                    <Option value="1">Red</Option>
-                    <Option value="2">Green</Option>
-                    <Option value="3">Blue</Option>
+                    <Option value="1">产品部</Option>
+                    <Option value="2">研发部</Option>
+                    <Option value="3">测试部</Option>
                 </Select>
             </Form.Item>
 
