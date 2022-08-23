@@ -12,6 +12,7 @@ import {
 import { currentPath } from "../utils/common";
 import store from "../store/index";
 import "../css/menu.scss";
+import AvatarImg from "@/assets/avatar.webp";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -143,7 +144,7 @@ class AvatarMenus extends React.Component<any, any> {
         });
     }
     render() {
-        const avatar = store.getState()?.userInfo?.value.avatar;
+        const avatar = store.getState()?.userInfo?.value.avatar || AvatarImg;
 
         const menu =
             <Menu>

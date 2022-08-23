@@ -50,12 +50,14 @@ export default class Login extends React.Component<any, any> {
             });
         } else {
             if (values.regPassword !== values.regPasswordAgain) {
+                console.log(123);
                 message.error("两次密码输入不一致！请重新输入");
             }
             LoginApi.register({
                 userName: values.regUsername,
                 userId: values.regUserId,
-                password: values.regPassword
+                password: values.regPassword,
+                rePassword: values.regPasswordAgain
             }).then((res: any) => {
                 if (res.code === 200) {
                     message.success(res.msg);

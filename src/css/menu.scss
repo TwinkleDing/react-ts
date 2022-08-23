@@ -1,43 +1,41 @@
 $logo-size: 30px;
 
 .app-content {
-    height: 100%;
-    width: 100%;
+	height: 100%;
+	width: 100%;
 
-    .header {
-        display: flex;
-        justify-content: space-between;
-        color: #fff;
-        .logo {
-            float: left;
-            width: 120px;
-            height: 31px;
-            margin: 16px 24px 16px 0;
-            &-img {
-                background-image: url("../assets/logo.png");
-                background-size: 100% 100%;
-                width: $logo-size;
-                height: $logo-size;
-            }
-        }
+	.header {
+		display: flex;
+		justify-content: space-between;
+		color: #fff;
+		.logo {
+			float: left;
+			width: 120px;
+			height: 31px;
+			margin: 16px 24px 16px 0;
+			&-img {
+				width: $logo-size;
+				height: $logo-size;
+			}
+		}
 
-        &-user {
-            cursor: pointer;
-            font-size: 16px;
-            .avatar {
-                display: inline-block;
-                vertical-align: middle;
-                width: $logo-size;
-                height: $logo-size;
-                background-size: 100% 100%;
-                background-image: url("../assets/avatar.webp");
-                background-size: 100% 100%;
-                margin-right: 6px;
-            }
-        }
-    }
+		&-user {
+			cursor: pointer;
+			font-size: 16px;
+			.avatar {
+				display: inline-block;
+				vertical-align: middle;
+				width: $logo-size;
+				height: $logo-size;
+				background-size: 100% 100%;
+				background-image: url("../assets/avatar.webp");
+				background-size: 100% 100%;
+				margin-right: 6px;
+			}
+		}
+	}
 
-    .site-layout-background {
-        background: #fff;
-    }
+	.site-layout-background {
+		background: #fff;
+	}
 }

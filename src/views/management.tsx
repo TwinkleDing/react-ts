@@ -30,7 +30,9 @@ const Management: React.FC = () => {
     useEffect(() => {
         // 获取用户列表
         ManagementApi.userList().then((res: any) => {
-            console.log(res);
+            res.data.map((item: any) => {
+                item.key = item.userId;
+            });
             setUserList(res.data);
         });
 
