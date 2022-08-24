@@ -44,7 +44,7 @@ const My: React.FC = () => {
 		const params = { ...values, userId };
 
 		MyApi.update(params).then((res: any) => {
-			if (res.status === 200) {
+			if (res.code === 200) {
 				const user = {
 					type: "USER_INFO",
 					value: res.data
