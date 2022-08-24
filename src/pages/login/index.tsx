@@ -27,7 +27,7 @@ export default class Login extends React.Component<any, any> {
         if (this.state.login) {
 
             LoginApi.login({
-                userId: values.username,
+                userId: values.userId,
                 password: values.password
             }).then((res: any) => {
                 if (res.code === 200) {
@@ -50,7 +50,6 @@ export default class Login extends React.Component<any, any> {
             });
         } else {
             if (values.regPassword !== values.regPasswordAgain) {
-                console.log(123);
                 message.error("两次密码输入不一致！请重新输入");
             }
             LoginApi.register({
@@ -90,9 +89,9 @@ export default class Login extends React.Component<any, any> {
                         {...layout}
                         className={`login-form ${this.state.login ? "translateY0" : "translateY-120"}`}>
                         <Form.Item
-                            label="工号"
-                            name="username"
-                            rules={[{ required: this.state.login, message: "请输入工号!" }]}>
+                            label="账号"
+                            name="userId"
+                            rules={[{ required: this.state.login, message: "请输入账号!" }]}>
                             <Input />
                         </Form.Item>
                         <Form.Item
@@ -134,9 +133,9 @@ function Register(props: any) {
                 <Input />
             </Form.Item>
             <Form.Item
-                label="工号"
+                label="账号"
                 name="regUserId"
-                rules={[{ required: !props.login, message: "请输入工号!" }]}>
+                rules={[{ required: !props.login, message: "请输入账号!" }]}>
                 <Input />
             </Form.Item>
             <Form.Item

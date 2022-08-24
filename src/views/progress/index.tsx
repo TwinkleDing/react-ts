@@ -5,7 +5,7 @@ import style from "@/css/modules/progress.module.scss";
 
 const columns = [
     {
-        title: "工号",
+        title: "账号",
         dataIndex: "userId"
     },
     {
