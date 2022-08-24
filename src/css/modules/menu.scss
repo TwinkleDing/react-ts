@@ -28,7 +28,7 @@ $logo-size: 30px;
 				width: $logo-size;
 				height: $logo-size;
 				background-size: 100% 100%;
-				background-image: url("../assets/avatar.webp");
+				background-image: url("../../assets/avatar.webp");
 				background-size: 100% 100%;
 				margin-right: 6px;
 			}
@@ -37,5 +37,7 @@ $logo-size: 30px;
 
 	.site-layout-background {
 		background: #fff;
+		overflow-y: auto;
+		overflow-x: hidden;
 	}
 }

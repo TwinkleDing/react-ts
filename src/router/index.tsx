@@ -3,9 +3,9 @@ import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 import { ConfigProvider, Spin } from "antd";
 import zhCN from "antd/lib/locale/zh_CN";
 import routerList from "./routerList";
-import Login from "@/views/login";
+import Login from "@/pages/login";
 import store from "@/store/index";
-import Menus from "@/views/menu";
+import Menus from "@/pages/menu";
 import { RouterType } from "@/interface";
 import { currentPath } from "@/utils/common";
 

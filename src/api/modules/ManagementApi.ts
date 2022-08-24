@@ -1,5 +1,5 @@
 import HttpRequest from "../index";
 
 export default class ManagementApi extends HttpRequest {
-	static userList = () => this.get("/userList");
+	static getUserList = (query: object) => this.get("/userList", query);
 }

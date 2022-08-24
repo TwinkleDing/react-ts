@@ -1,0 +1,22 @@
+@import "../module.scss";
+
+.progress {
+	&-setting {
+		&-urged {
+			margin: 0 10px;
+			@extend %warn-button;
+
+			&:hover {
+				@extend %warn-button;
+			}
+
+			&:visited {
+				@extend %warn-button;
+			}
+
+			&:focus {
+				@extend %warn-button;
+			}
+		}
+	}
+}

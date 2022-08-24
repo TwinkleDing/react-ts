@@ -1,9 +1,9 @@
 import React from "react";
 import { Form, Input, Button, Row, Col, message } from "antd";
 import { FormInstance } from "antd/es/form";
-import "@/css/login.scss";
 import store from "@/store/index";
 import LoginApi from "@/api/modules/LoginApi";
+import "@/css/modules/login.scss";
 
 const layout = {
     labelCol: { span: 6 },

@@ -15,6 +15,7 @@ import {
 import store from "@/store/index";
 import MyApi from "@/api/modules/MyApi";
 import { getBase64 } from "@/utils/tools";
+import style from "@/css/modules/my.module.scss";
 
 const { Option } = Select;
 const formItemLayout = {
@@ -89,6 +90,7 @@ const My: React.FC = () => {
 
     return (
         <Form
+            className={style.my}
             form={form}
             name="validate_other"
             {...formItemLayout}

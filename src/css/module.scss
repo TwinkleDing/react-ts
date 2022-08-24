@@ -1,5 +1,11 @@
-// 引入任务样式文件
-@import "./task.scss";
-@import "./progress.scss";
-@import "./my.scss";
-@import "./undone.scss";
+// 主要颜色
+$highlight-color: #1890ff;
+
+// 警告颜色
+$warn-color: #e6a23c;
+
+// 警告按钮
+%warn-button {
+	background: $warn-color;
+	border-color: $warn-color;
+}

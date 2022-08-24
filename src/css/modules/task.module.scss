@@ -1,0 +1,135 @@
+@import "../module.scss";
+@import "../transform.scss";
+
+
+.task {
+	&-new {
+		display: flex;
+		justify-content: space-around;
+		padding-top: 100px;
+
+		& > div {
+			height: 300px;
+			width: 300px;
+			margin: 30px;
+			overflow: hidden;
+			text-align: center;
+			border-radius: 50%;
+			cursor: pointer;
+
+			&:hover {
+				animation: run 2s;
+				animation-iteration-count: infinite;
+			}
+		}
+	}
+
+	@keyframes run {
+		0% {
+			box-shadow: 0 0 50px 0 $highlight-color;
+		}
+
+		50% {
+			box-shadow: 0 0 100px 10px $highlight-color;
+		}
+
+		100% {
+			box-shadow: 0 0 50px 0 $highlight-color;
+		}
+	}
+
+	&-title {
+		font-size: 24px;
+		@extend .translateY100;
+
+		span {
+			display: inline-block;
+
+			&::after {
+				display: block;
+				content: " ";
+				border-bottom: 2px solid $highlight-color;
+				height: 10px;
+				width: 100%;
+			}
+		}
+	}
+
+	&-preset {
+		&-content {
+			@extend .translateY100;
+
+			:first-child {
+				@extend .translateX230;
+			}
+
+			:last-child {
+				@extend .translateX-230;
+			}
+		}
+
+		&-btn {
+			transition: all 1s;
+			transform: translateY(68px);
+			opacity: 0;
+			height: 0;
+		}
+	}
+
+	&-preset:hover {
+		.task-title {
+			@extend .translateY60;
+		}
+
+		.task-preset-content {
+			:first-child {
+				@extend .translateX0;
+			}
+
+			:last-child {
+				@extend .translateX0;
+			}
+		}
+
+		.task-preset-btn {
+			@extend .translateY120;
+			opacity: 1;
+			height: 40px;
+		}
+	}
+
+	&-custom {
+		&-content {
+			@extend .translateY180;
+			background-color: #fafafa;
+			opacity: 0;
+			height: 0;
+			padding: 0 0 30%;
+		}
+
+		&-upload {
+			border: none !important;
+			width: 80%;
+		}
+
+		.ant-upload-list {
+			transform: translateY(-100px);
+		}
+
+		.ant-upload-text {
+			margin-top: 65px !important;
+		}
+	}
+
+	&-custom:hover {
+		.task-title {
+			@extend .translateY60;
+		}
+
+		.task-custom-content {
+			@extend .translateY80;
+			height: 70%;
+			opacity: 1;
+		}
+	}
+}

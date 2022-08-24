@@ -18,6 +18,7 @@ import ChartTab from "@/components/ChartTab";
 import Kirby from "@/assets/Kirby.jpg";
 import Zelda from "@/assets/Zelda.webp";
 import Pokemon from "@/assets/Pokemon.webp";
+import style from "@/css/modules/undone.module.scss";
 
 const originData: UndoneItem[] = [];
 
@@ -254,7 +255,7 @@ class Undone extends React.Component<any, any> {
 
     render() {
         return (
-            <div className="undone">
+            <div className={style.undone}>
                 <Divider orientation="left">待完成的任务</Divider>
                 <Form ref={this.state.form} component={false}>
                     <Table
@@ -264,7 +265,7 @@ class Undone extends React.Component<any, any> {
                             }
                         }}
                         bordered
-                        rowClassName="editable-row"
+                        rowClassName={style["editable-row"]}
                         pagination={{
                             hideOnSinglePage: true,
                             onChange: this.cancel
@@ -273,7 +274,7 @@ class Undone extends React.Component<any, any> {
                         dataSource={this.state.data}
                     />
                 </Form>
-                <div className="undone-tab">
+                <div className={style["undone-tab"]}>
                     <TodoList />
                     <div>
                         <Divider orientation="left">掌握技能</Divider>
@@ -351,10 +352,10 @@ class TodoList extends React.Component<any, any> {
     list() {
         return this.state.listData.map((item: TodoListItem, index: number) => {
             return (
-                <div className="todo-item" key={index}>
+                <div className={style["todo-item"]} key={index}>
                     <Checkbox
                         checked={item.status === 1}
-                        className={`${item.status === 1 ? "todo-active" : "not-active"}`}
+                        className={item.status === 1 ? style["todo-active"] : style["not-active"]}
                         onChange={(e) => this.onChange(e, index)}
                     >
                         {item.title}
@@ -362,16 +363,16 @@ class TodoList extends React.Component<any, any> {
                     <span onClick={() => this.removeItem(index)}>
                         <MinusCircleOutlined />
                     </span>
-                </div>
+                </div >
             );
         });
     }
     render() {
         return (
-            <div className="todo-list">
+            <div className={style["todo-list"]}>
                 <Divider orientation="left">待办事项</Divider>
                 {this.list()}
-            </div>
+            </div >
         );
     }
 }
@@ -416,7 +417,7 @@ class LookingGames extends React.Component<any, any> {
     }
     list() {
         return this.state.gameList.map((item: GameItem, index: number) => {
-            return <div className="games-item" key={index}>
+            return <div className={style["games-item"]} key={index}>
                 <Image
                     width={80}
                     height={80}
@@ -424,16 +425,16 @@ class LookingGames extends React.Component<any, any> {
                     preview={false}
                     alt="" />
                 <div>
-                    <div className="games-title">{item.name}</div>
+                    <div className={style["games-title"]}>{item.name}</div>
                     <div>发行价格：<b>{item.price}</b></div>
                     <div>发行平台：<b>{item.platform}</b></div>
                     <div>发行时间：<b>{item.time}</b></div>
                 </div>
-            </div>;
+            </div >;
         });
     }
     render() {
-        return <div className="looking-games">{this.list()}</div>;
+        return <div className={style["looking-games"]}>{this.list()}</div>;
     }
 }
 export default Undone;

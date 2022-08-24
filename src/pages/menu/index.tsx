@@ -9,10 +9,10 @@ import {
     SettingOutlined,
     DiffOutlined
 } from "@ant-design/icons";
-import { currentPath } from "../utils/common";
-import store from "../store/index";
-import "../css/menu.scss";
+import { currentPath } from "@/utils/common";
+import store from "@/store/index";
 import AvatarImg from "@/assets/avatar.webp";
+import "@/css/modules/menu.scss";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -98,7 +98,7 @@ class Menus extends React.Component<any, any> {
                             {this.list()}
                         </Menu>
                     </Sider>
-                    <Layout style={{ padding: "0 24px 24px" }}>
+                    <Layout style={{ padding: "0 24px" }}>
                         <Breadcrumb style={{ margin: "16px 0" }} />
                         <Content
                             className="site-layout-background"
