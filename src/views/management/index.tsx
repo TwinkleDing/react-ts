@@ -30,60 +30,11 @@ interface DataType {
 	departmentName: number;
 	positionName: string;
 }
-const columns: ColumnsType<DataType> = [
-	{
-		title: "姓名",
-		dataIndex: "userName",
-		key: "userName"
-	},
-	{
-		title: "年龄",
-		dataIndex: "age",
-		key: "age"
-	},
-	{
-		title: "部门",
-		dataIndex: "departmentName",
-		key: "departmentName"
-	},
-	{
-		title: "职位",
-		dataIndex: "positionName",
-		key: "positionName"
-	},
-	{
-		title: "Action",
-		key: "action",
-		width: "200px",
-		// eslint-disable-next-line react/display-name
-		render: (_, record) =>
-			<Space size="middle">
-				<a
-					onClick={() => {
-						console.log(record);
-					}}
-				>
-					修改
-				</a>
-				<div>{deleteBtn(record)}</div>
-			</Space>
-
-	}
-];
-const deleteBtn = (record: any) =>
-	<Popconfirm title="确定删除此人员么?" onConfirm={() => deleteUser(record)} okText="确定" cancelText="取消">
-		<a href="#">删除</a>
-	</Popconfirm>
-
-;
-
-const deleteUser = (record: any) => {
-	message.success("删除成功！");
-	console.log(record);
-};
 
 const Management: React.FC = () => {
 	const [userList, setUserList] = useState([]);
+	const [recond, setRecond] = useState({ userId: "" });
+	const [edit, setEdit] = useState(false);
 	const [searchValue, setSearchValue] = useState("");
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const [form] = Form.useForm();
@@ -109,8 +60,10 @@ const Management: React.FC = () => {
 		});
 	};
 
-	const showModal = () => {
+	const openNewUser = () => {
+		setEdit(false);
 		setIsModalVisible(true);
+		form.resetFields();
 	};
 
 	const handleOk = () => {
@@ -120,18 +73,86 @@ const Management: React.FC = () => {
 	const handleCancel = () => {
 		setIsModalVisible(false);
 	};
+
 	const onFinish = (values: any) => {
 		const params = { ...values };
 
-		ManagementApi.addUser(params).then((res: any) => {
-			if (res.code === 200) {
-				message.success(res.msg);
-                handleCancel();
-                getList();
-			} else {
-				message.error(res.msg);
-			}
-		});
+		if (!edit) {
+			ManagementApi.addUser(params).then((res: any) => {
+				if (res.code === 200) {
+					message.success(res.msg);
+					handleCancel();
+					getList();
+				} else {
+					message.error(res.msg);
+				}
+			});
+		} else {
+			params.userId = recond.userId;
+			ManagementApi.updateUser(params).then((res: any) => {
+				if (res.code === 200) {
+					message.success(res.msg);
+					handleCancel();
+					getList();
+				} else {
+					message.error(res.msg);
+				}
+			});
+		}
+	};
+
+	const columns: ColumnsType<DataType> = [
+		{
+			title: "姓名",
+			dataIndex: "userName",
+			key: "userName"
+		},
+		{
+			title: "年龄",
+			dataIndex: "age",
+			key: "age"
+		},
+		{
+			title: "部门",
+			dataIndex: "departmentName",
+			key: "departmentName"
+		},
+		{
+			title: "职位",
+			dataIndex: "positionName",
+			key: "positionName"
+		},
+		{
+			title: "Action",
+			key: "action",
+			width: "200px",
+			// eslint-disable-next-line react/display-name
+			render: (_, record) =>
+				<Space size="middle">
+					<a onClick={() => editBtn(record)}>修改</a>
+					<div>{deleteBtn(record)}</div>
+				</Space>
+
+		}
+	];
+
+	const editBtn = (record: any) => {
+		setRecond(record);
+		setEdit(true);
+		setIsModalVisible(true);
+		form.setFieldsValue(record);
+	};
+
+	const deleteBtn = (record: any) =>
+		<Popconfirm title="确定删除此人员么?" onConfirm={() => deleteUser(record)} okText="确定" cancelText="取消">
+			<a href="#">删除</a>
+		</Popconfirm>
+
+	;
+
+	const deleteUser = (record: any) => {
+		message.success("删除成功！");
+		console.log(record);
 	};
 
 	return (
@@ -145,7 +166,7 @@ const Management: React.FC = () => {
 					enterButton="搜索"
 					onSearch={onSearch}
 				/>
-				<Button onClick={showModal} type="primary">
+				<Button onClick={openNewUser} type="primary">
 					新建
 				</Button>
 			</div>
@@ -159,18 +180,20 @@ const Management: React.FC = () => {
 				onCancel={handleCancel}
 			>
 				<Form form={form} name="validate_other" {...formItemLayout} onFinish={onFinish}>
-					<Form.Item
-						name="userId"
-						label="账号"
-						rules={[
-							{
-								required: true,
-								message: "请输入账号!"
-							}
-						]}
-					>
-						<Input placeholder="请输入账号!" />
-					</Form.Item>
+					{!edit &&
+						<Form.Item
+							name="userId"
+							label="账号"
+							rules={[
+								{
+									required: true,
+									message: "请输入账号!"
+								}
+							]}
+						>
+							<Input placeholder="请输入账号!" />
+						</Form.Item>
+					}
 					<Form.Item
 						name="userName"
 						label="姓名"

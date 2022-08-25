@@ -25,7 +25,14 @@ const My: React.FC = () => {
 	const [form] = Form.useForm();
 	const [userId] = useState(store.getState()?.userInfo?.value.userId);
 
-	const [fileList, setFileList] = useState<UploadFile[]>([]);
+	const [fileList, setFileList] = useState<UploadFile[]>([
+		{
+			uid: "-1",
+			status: "done",
+			name: "image.png",
+			url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+		}
+	]);
 	const [previewVisible, setPreviewVisible] = useState(false);
 	const [previewImage, setPreviewImage] = useState("");
 	const [previewTitle, setPreviewTitle] = useState("");
@@ -35,8 +42,10 @@ const My: React.FC = () => {
 		// 获取我的信息
 		MyApi.getInfo({ userId }).then((res: any) => {
 			form.setFieldsValue(res.data);
-			setFileList([res.data.avatar]);
+			fileList[0].url = res.data.avatar;
+			setFileList([...fileList]);
 		});
+
 	}, []);
 
 	// 表格提交事件
