@@ -1,6 +1,7 @@
 import { getStore, setStore } from "@/utils/storage";
 import { PROJECT_NAME, LOCAL_STORAGE } from "@/utils/common";
 import { ActionType, UserInfo } from "@/interface";
+import { deepClone } from "@/utils/tools";
 
 type StateType = {
 	userInfo: UserInfo;
@@ -20,13 +21,13 @@ export default (state: any = defaultState, action: ActionType): StateType => {
 
 	switch (action.type) {
 		case "USER_INFO":
-			newState.userInfo = action;
+			newState.userInfo = deepClone(action);
 			break;
 		case "AVATAR":
-			newState.avatar = action;
+			newState.avatar = deepClone(action);
 			break;
 		case "TOKEN":
-			newState.token = action;
+			newState.token = deepClone(action);
 			break;
 		default:
 			console.log(newState);

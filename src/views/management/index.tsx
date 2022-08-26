@@ -27,6 +27,7 @@ interface DataType {
 	key: React.Key;
 	userName: string;
 	age: string;
+	sex: string;
 	departmentName: number;
 	positionName: string;
 }
@@ -113,6 +114,15 @@ const Management: React.FC = () => {
 			key: "age"
 		},
 		{
+			title: "性别",
+			dataIndex: "sex",
+			key: "sex",
+			// eslint-disable-next-line react/display-name
+			render: (_, record) =>
+				<Space size="middle">{record.sex === "1" ? "男" : record.sex === "0" ? "女" : ""}</Space>
+
+		},
+		{
 			title: "部门",
 			dataIndex: "departmentName",
 			key: "departmentName"
@@ -123,7 +133,7 @@ const Management: React.FC = () => {
 			key: "positionName"
 		},
 		{
-			title: "Action",
+			title: "操作",
 			key: "action",
 			width: "200px",
 			// eslint-disable-next-line react/display-name
