@@ -20,11 +20,13 @@ body,
 	height: 100%;
 	width: 100%;
 }
-.app-content {
+.app {
 	min-width: 1350px;
-	min-height: 100%;
-	height: auto;
+	height: 100%;
 }
+
+// 引入公共样式动画
+@import "./public.scss";
 
 // 引入公共样式动画
 @import "./common.scss";

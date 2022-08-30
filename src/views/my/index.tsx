@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
 import ImgCrop from "antd-img-crop";
-import { Button, Input, Form, InputNumber, Radio, Upload, Select, Modal, message } from "antd";
+import { Divider, Button, Input, Form, InputNumber, Radio, Upload, Select, Modal, message } from "antd";
 import store from "@/store/index";
 import MyApi from "@/api/modules/MyApi";
 import { getBase64 } from "@/utils/tools";
@@ -13,7 +13,6 @@ const formItemLayout = {
 	wrapperCol: { span: 14 }
 };
 const normFile = (e: any) => {
-	console.log("Upload event:", e);
 	if (Array.isArray(e)) {
 		return e;
 	}
@@ -30,7 +29,7 @@ const My: React.FC = () => {
 			uid: "-1",
 			status: "done",
 			name: "image.png",
-			url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+			url: ""
 		}
 	]);
 	const [previewVisible, setPreviewVisible] = useState(false);
@@ -45,7 +44,6 @@ const My: React.FC = () => {
 			fileList[0].url = res.data.avatar;
 			setFileList([...fileList]);
 		});
-
 	}, []);
 
 	// 表格提交事件
@@ -87,74 +85,77 @@ const My: React.FC = () => {
 	};
 
 	return (
-		<Form className={style.my} form={form} name="validate_other" {...formItemLayout} onFinish={onFinish}>
-			<Form.Item
-				name="userName"
-				label="姓名"
-				rules={[
-					{
-						required: true,
-						message: "请输入姓名!"
-					}
-				]}
-			>
-				<Input placeholder="请输入姓名!" />
-			</Form.Item>
+		<div>
+			<Divider orientation="left">我的信息</Divider>
+			<Form className={style.my} form={form} name="validate_other" {...formItemLayout} onFinish={onFinish}>
+				<Form.Item
+					name="userName"
+					label="姓名"
+					rules={[
+						{
+							required: true,
+							message: "请输入姓名!"
+						}
+					]}
+				>
+					<Input placeholder="请输入姓名!" />
+				</Form.Item>
 
-			<Form.Item name="age" label="年龄" rules={[{ required: true, message: "请输入年龄!" }]}>
-				<InputNumber min={1} />
-			</Form.Item>
+				<Form.Item name="age" label="年龄" rules={[{ required: true, message: "请输入年龄!" }]}>
+					<InputNumber min={1} />
+				</Form.Item>
 
-			<Form.Item name="sex" label="性别" rules={[{ required: true, message: "请选择性别!" }]}>
-				<Radio.Group>
-					<Radio value="1">男</Radio>
-					<Radio value="0">女</Radio>
-				</Radio.Group>
-			</Form.Item>
+				<Form.Item name="sex" label="性别" rules={[{ required: true, message: "请选择性别!" }]}>
+					<Radio.Group>
+						<Radio value="1">男</Radio>
+						<Radio value="0">女</Radio>
+					</Radio.Group>
+				</Form.Item>
 
-			<Form.Item name="position" label="职位" rules={[{ required: true, message: "请选择职位!" }]}>
-				<Select placeholder="请选择职位!">
-					<Option value="1">前端</Option>
-					<Option value="2">后端</Option>
-					<Option value="3">开发</Option>
-				</Select>
-			</Form.Item>
+				<Form.Item name="position" label="职位" rules={[{ required: true, message: "请选择职位!" }]}>
+					<Select placeholder="请选择职位!">
+						<Option value="1">前端</Option>
+						<Option value="2">后端</Option>
+						<Option value="3">开发</Option>
+					</Select>
+				</Form.Item>
 
-			<Form.Item name="department" label="部门" rules={[{ required: true, message: "请选择部门!" }]}>
-				<Select placeholder="请选择部门!">
-					<Option value="1">产品部</Option>
-					<Option value="2">研发部</Option>
-					<Option value="3">测试部</Option>
-				</Select>
-			</Form.Item>
+				<Form.Item name="department" label="部门" rules={[{ required: true, message: "请选择部门!" }]}>
+					<Select placeholder="请选择部门!">
+						<Option value="1">产品部</Option>
+						<Option value="2">研发部</Option>
+						<Option value="3">测试部</Option>
+					</Select>
+				</Form.Item>
 
-			<Form.Item name="avatar" label="头像" valuePropName="fileList" getValueFromEvent={normFile}>
-				<ImgCrop rotate>
-					<Upload
-						action="http://localhost:3333/api/upload"
-						listType="picture-card"
-						fileList={fileList}
-						onChange={onChange}
-						onPreview={handlePreview}
-						headers={{
-							Authorization: token
-						}}
-					>
-						{fileList.length < 1 && "+ Upload"}
-					</Upload>
-				</ImgCrop>
-			</Form.Item>
-			<Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-				<Button type="primary" htmlType="submit">
-					Submit
-				</Button>
-			</Form.Item>
+				<Form.Item name="avatar" label="头像" valuePropName="fileList" getValueFromEvent={normFile}>
+					<ImgCrop rotate>
+						<Upload
+							action="http://localhost:3333/api/upload"
+							listType="picture-card"
+							fileList={fileList}
+							onChange={onChange}
+							onPreview={handlePreview}
+							headers={{
+								Authorization: token
+							}}
+						>
+							{fileList.length < 1 && "+ Upload"}
+						</Upload>
+					</ImgCrop>
+				</Form.Item>
+				<Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+					<Button type="primary" htmlType="submit">
+						Submit
+					</Button>
+				</Form.Item>
 
-			{/* 图片预览的模态窗 */}
-			<Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
-				<img alt="example" style={{ width: "100%" }} src={previewImage} />
-			</Modal>
-		</Form>
+				{/* 图片预览的模态窗 */}
+				<Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
+					<img alt="example" style={{ width: "100%" }} src={previewImage} />
+				</Modal>
+			</Form>
+		</div>
 	);
 };
 

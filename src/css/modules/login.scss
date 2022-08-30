@@ -23,19 +23,20 @@
 		height: 300px;
 		width: 500px;
 		transition: all 1s;
-		background: url("../../assets/leiqiu.webp") left center no-repeat, url("") right center no-repeat;
+		background: url("../../assets/leiqiu.webp") left center no-repeat;
 	}
 
 	.reg-login-box {
 		height: 200px;
 		width: 400px;
 		transition: all 1s;
-		background: url("../../assets/pikaqiu.webp") left center no-repeat,
-			url("../../assets/leizhishi.png") right center no-repeat;
+		background: url("../../assets/pikaqiu.webp") left center no-repeat;
 	}
+
 	input,
 	.ant-input-password {
 		background: #ffffff1a !important;
+
 		input {
 			background: none !important;
 		}

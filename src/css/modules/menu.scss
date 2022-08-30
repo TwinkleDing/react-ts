@@ -1,17 +1,19 @@
 $logo-size: 30px;
 
-.app-content {
+.app {
 	height: 100%;
 	width: 100%;
 
-	.header {
+	&-header {
 		display: flex;
 		justify-content: space-between;
 		color: #fff;
+
 		.logo {
 			float: left;
 			width: 120px;
 			height: 100%;
+
 			&-img {
 				width: 60px;
 				height: 100%;
@@ -21,9 +23,10 @@ $logo-size: 30px;
 			}
 		}
 
-		&-user {
+		.header-user {
 			cursor: pointer;
 			font-size: 16px;
+
 			.avatar {
 				display: inline-block;
 				vertical-align: middle;
@@ -37,9 +40,16 @@ $logo-size: 30px;
 		}
 	}
 
-	.site-layout-background {
-		background: #fff;
-		overflow-y: auto;
-		overflow-x: hidden;
+	&-content {
+		padding: 0 24px;
+
+		&-content {
+			padding: 24px;
+			margin: 0;
+			min-height: 280px;
+			background: #fff;
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
 	}
 }

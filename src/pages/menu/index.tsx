@@ -80,8 +80,8 @@ class Menus extends React.Component<any, any> {
 		const current: string = currentRoute ? currentRoute.key : "undone";
 
 		return (
-			<Layout className="app-content">
-				<Header className="header">
+			<Layout className="app">
+				<Header className="app-header">
 					<div className="logo">
 						<div className="logo-img" />
 					</div>
@@ -90,7 +90,7 @@ class Menus extends React.Component<any, any> {
 					</div>
 				</Header>
 				<Layout>
-					<Sider width={200} className="site-layout-background">
+					<Sider width={200}>
 						<Menu
 							onClick={this.handleClick}
 							selectedKeys={[current]}
@@ -101,18 +101,9 @@ class Menus extends React.Component<any, any> {
 							{this.list()}
 						</Menu>
 					</Sider>
-					<Layout style={{ padding: "0 24px" }}>
+					<Layout className="app-content">
 						<Breadcrumb style={{ margin: "16px 0" }} />
-						<Content
-							className="site-layout-background"
-							style={{
-								padding: 24,
-								margin: 0,
-								minHeight: 280
-							}}
-						>
-							{this.props.content}
-						</Content>
+						<Content className="app-content-content ">{this.props.content}</Content>
 						<Footer style={{ textAlign: "center" }}>Ant Design ©2021 Created by Twinkle Ding</Footer>
 					</Layout>
 				</Layout>
