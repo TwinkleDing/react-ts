@@ -7,11 +7,11 @@ import Routes from "./router/index";
 import "./css/index.scss";
 
 ReactDOM.render(
-    <React.StrictMode>
+    <React.Fragment>
         <Provider store={store}>
             <Routes />
         </Provider>
-    </React.StrictMode>,
+    </React.Fragment>,
     document.getElementById("root")
 );
 

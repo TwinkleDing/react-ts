@@ -1,0 +1,44 @@
+.login-page {
+	height: 100%;
+	width: 100%;
+	position: relative;
+	background-image: url("../../assets/login-background.jpeg");
+
+	&-box {
+		height: 200px;
+		width: 400px;
+		border: 1px solid #c0c4cc;
+		border-radius: 20px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+		padding: 30px;
+		overflow: hidden;
+	}
+
+	.login-reg-box {
+		height: 300px;
+		width: 500px;
+		transition: all 1s;
+		background: url("../../assets/leiqiu.webp") left center no-repeat;
+	}
+
+	.reg-login-box {
+		height: 200px;
+		width: 400px;
+		transition: all 1s;
+		background: url("../../assets/pikaqiu.webp") left center no-repeat;
+	}
+
+	input,
+	.ant-input-password {
+		background: #ffffff1a !important;
+
+		input {
+			background: none !important;
+		}
+	}
+}

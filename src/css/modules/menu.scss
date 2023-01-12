@@ -1,0 +1,55 @@
+$logo-size: 30px;
+
+.app {
+	height: 100%;
+	width: 100%;
+
+	&-header {
+		display: flex;
+		justify-content: space-between;
+		color: #fff;
+
+		.logo {
+			float: left;
+			width: 120px;
+			height: 100%;
+
+			&-img {
+				width: 60px;
+				height: 100%;
+				background-image: url("../../assets/MSP.png");
+				background-position: -620px 0px;
+				background-repeat: no-repeat;
+			}
+		}
+
+		.header-user {
+			cursor: pointer;
+			font-size: 16px;
+
+			.avatar {
+				display: inline-block;
+				vertical-align: middle;
+				width: $logo-size;
+				height: $logo-size;
+				background-size: 100% 100%;
+				background-image: url("../../assets/avatar.webp");
+				background-size: 100% 100%;
+				margin-right: 6px;
+			}
+		}
+	}
+
+	&-content {
+		padding: 0 24px;
+
+		&-content {
+			padding: 24px;
+			margin: 0;
+			min-height: 280px;
+			background: #fff;
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+	}
+}

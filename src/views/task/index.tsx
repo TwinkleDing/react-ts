@@ -1,6 +1,7 @@
 import React from "react";
 import { Tag, Divider, Radio, Upload, Button, message } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
+import style from "@/css/modules/task.module.scss";
 const { Dragger } = Upload;
 
 export default class Task extends React.Component<any, any> {
@@ -44,35 +45,35 @@ export default class Task extends React.Component<any, any> {
         };
 
         return (
-            <div className="task">
+            <div className={style.task}>
                 <Divider orientation="left">任务模板</Divider>
                 <TemplateList dataList={templateList} />
                 <Divider orientation="left">新建任务</Divider>
-                <div className="task-new">
-                    <div className="task-preset">
-                        <div className="task-title">
+                <div className={style["task-new"]}>
+                    <div className={style["task-preset"]}>
+                        <div className={style["task-title"]}>
                             <span>预制任务</span>
                         </div>
                         <Radio.Group
-                            className="task-preset-content"
+                            className={style["task-preset-content"]}
                             options={optionsWithDisabled}
                             onChange={this.presetChange}
                             value={this.state.radioValue}
                             optionType="button"
                             buttonStyle="solid"
                         />
-                        <div className="task-preset-btn">
+                        <div className={style["task-preset-btn"]}>
                             <Button onClick={this.presetConfirm} type="primary">确定</Button>
                         </div>
                     </div>
-                    <div className="task-custom">
-                        <div className="task-title">
+                    <div className={style["task-custom"]}>
+                        <div className={style["task-title"]}>
                             <span>自定义任务</span>
                         </div>
-                        <div className="task-custom-content">
-                            <Dragger className="task-custom-upload" {...props}>
-                                <p className="ant-upload-text">单击或拖动文件到此区域以上载</p>
-                                <p className="ant-upload-drag-icon">
+                        <div className={style["task-custom-content"]}>
+                            <Dragger className={style["task-custom-upload"]} {...props}>
+                                <p className={style["ant-upload-text"]}>单击或拖动文件到此区域以上载</p>
+                                <p className={style["ant-upload-drag-icon"]}>
                                     <InboxOutlined />
                                 </p>
                             </Dragger>

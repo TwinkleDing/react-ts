@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Divider, Table, Empty, Button, Popconfirm as PopConfirm } from "antd";
-import { progressTableListType, progressTableType, progressStateType } from "../interface";
+import { progressTableListType, progressTableType, progressStateType } from "@/interface";
+import style from "@/css/modules/progress.module.scss";
 
 const columns = [
     {
-        title: "工号",
+        title: "账号",
         dataIndex: "userId"
     },
     {
@@ -53,7 +54,7 @@ export default class Progress extends React.Component<any, progressStateType> {
     };
     render() {
         return (
-            <div className="progress">
+            <div className={style.progress}>
                 <Divider orientation="left">进行中的任务</Divider>
                 <Empty />
                 <Divider orientation="left">任务详情</Divider>
@@ -122,7 +123,7 @@ function SettingColumn(props: any) {
     };
 
     return (
-        <div className="progress-setting">
+        <div className={style["progress-setting"]}>
             <PopConfirm
                 title={`是否催促${props.userId}更新数据？`}
                 visible={urgedVisible}
@@ -133,7 +134,7 @@ function SettingColumn(props: any) {
                 cancelText="算了算了">
                 <Button
                     onClick={() => urged(props.userId)}
-                    className="progress-setting-urged"
+                    className={style["progress-setting-urged"]}
                     type="primary">催</Button>
             </PopConfirm>
             <PopConfirm
